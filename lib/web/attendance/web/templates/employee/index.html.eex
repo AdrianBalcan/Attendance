@@ -1,0 +1,36 @@
+<h2>Listing employees</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Job</th>
+      <th>Team</th>
+      <th>Dob</th>
+      <th>Active</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for employee <- @employees do %>
+    <tr>
+      <td><%= employee.firstname %></td>
+      <td><%= employee.lastname %></td>
+      <td><%= employee.job %></td>
+      <td><%= employee.team %></td>
+      <td><%= employee.dob %></td>
+      <td><%= employee.active %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: employee_path(@conn, :show, employee), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: employee_path(@conn, :edit, employee), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: employee_path(@conn, :delete, employee), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New employee", to: employee_path(@conn, :new) %>
