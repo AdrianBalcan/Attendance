@@ -1,0 +1,25 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: attendance_dev
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+  web:
+    build: ./web
+#    command: "sh /app/script.sh"
+#    command: 'while:; do sleep 10; done'
+#    command: "mix deps.get && mix phoenix.server"
+    environment:
+      DEBUG: 1
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./lib/web:/app
+    depends_on:
+      - db
+    links:
+      - db:db
