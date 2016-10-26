@@ -31,7 +31,6 @@ RUN mkdir /app
 RUN mix local.rebar --force
 RUN mix local.hex --force
 RUN mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez --force
-VOLUME /app:../lib/app
 WORKDIR /app/attendance
 EXPOSE 4000
 
