@@ -28,12 +28,12 @@ RUN tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local
 RUN ln -s "/usr/local/node-v$NODE_VERSION-linux-x64/bin/node" /usr/bin/node
 RUN ln -s "/usr/local/node-v$NODE_VERSION-linux-x64/bin/npm" /usr/bin/npm
 RUN mkdir /app
-RUN mix local.rebar --force
 RUN mix local.hex --force
+RUN mix local.rebar --force
 RUN mix archive.install https://github.com/phoenixframework/archives/raw/master/phoenix_new.ez --force
 WORKDIR /app/attendance
 EXPOSE 4000
 
 #CMD ["sh", "-c", "ls"]
-CMD ["sh", "-c", "mix deps.get && mix phoenix.server"]
+CMD ["sh", "-c", "mix deps.get && mix ecto.migrate && mix phoenix.server"]
 #CMD ["mix phoenix.new attendance"]

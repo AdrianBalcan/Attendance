@@ -20,15 +20,16 @@ defmodule Attendance.EmployeeController do
       {:ok, _employee} ->
         conn
         |> put_flash(:info, "Employee created successfully.")
-        |> redirect(to: employee_path(conn, :index))
+        |> redirect(to: fingerprint_path(conn, :new, employeeID: _employee))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
   def show(conn, %{"id" => id}) do
+    fingerprints = Repo.all(from f in Attendance.Fingerprint, where: f.employeeID == ^id)
     employee = Repo.get!(Employee, id)
-    render(conn, "show.html", employee: employee)
+    render(conn, "show.html", employee: employee, fingerprints: fingerprints)
   end
 
   def edit(conn, %{"id" => id}) do

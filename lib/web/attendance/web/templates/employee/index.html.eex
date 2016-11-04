@@ -3,12 +3,12 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Firstname</th>
-      <th>Lastname</th>
-      <th>Job</th>
-      <th>Team</th>
-      <th>Dob</th>
-      <th>Active</th>
+      <th>Nume</th>
+      <th>Prenume</th>
+      <th>Pozitie</th>
+      <th>Echipa</th>
+      <th>Data nasterii</th>
+      <th>Activ</th>
 
       <th></th>
     </tr>

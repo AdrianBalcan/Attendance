@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: attendance_dev
       POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
+    ports:
+      - "5432:5432"
   web:
     build: ./web
 #    command: "sh /app/script.sh"

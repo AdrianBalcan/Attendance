@@ -18,6 +18,7 @@ defmodule Attendance.Router do
 
     get "/", PageController, :index
     resources "/employees", EmployeeController
+    resources "/fingerprints", FingerprintController
   end
 
   
