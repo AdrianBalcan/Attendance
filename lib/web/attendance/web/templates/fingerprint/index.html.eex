@@ -1,0 +1,30 @@
+<h2>Listing fingerprints</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Employeeid</th>
+      <th>Template</th>
+      <th>Active</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for fingerprint <- @fingerprints do %>
+    <tr>
+      <td><%= fingerprint.employeeID %></td>
+      <td><%= fingerprint.template %></td>
+      <td><%= fingerprint.active %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: fingerprint_path(@conn, :show, fingerprint), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: fingerprint_path(@conn, :edit, fingerprint), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: fingerprint_path(@conn, :delete, fingerprint), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New fingerprint", to: fingerprint_path(@conn, :new) %>

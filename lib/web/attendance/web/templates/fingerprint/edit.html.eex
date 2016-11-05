@@ -1,0 +1,6 @@
+<h2>Edit fingerprint</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: fingerprint_path(@conn, :update, @fingerprint) %>
+
+<%= link "Back", to: fingerprint_path(@conn, :index) %>

@@ -1,0 +1,23 @@
+<h2>Show fingerprint</h2>
+
+<ul>
+
+  <li>
+    <strong>Employeeid:</strong>
+    <%= @fingerprint.employeeID %>
+  </li>
+
+  <li>
+    <strong>Template:</strong>
+    <%= @fingerprint.template %>
+  </li>
+
+  <li>
+    <strong>Active:</strong>
+    <%= @fingerprint.active %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: fingerprint_path(@conn, :edit, @fingerprint) %>
+<%= link "Back", to: fingerprint_path(@conn, :index) %>
