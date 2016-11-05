@@ -3,8 +3,8 @@ defmodule Attendance.Fingerprint do
 
   schema "fingerprints" do
     field :employeeID, :integer
-    field :template, :string
-    field :active, :boolean, default: false
+    field :template, :binary
+    field :active, :boolean, default: true
 
     timestamps()
   end
