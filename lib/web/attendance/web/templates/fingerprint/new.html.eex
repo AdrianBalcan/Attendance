@@ -1,6 +1,20 @@
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <h2>New fingerprint</h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: fingerprint_path(@conn, :create) %>
+<div class="loading"></div>
 
-<%= link "Back", to: fingerprint_path(@conn, :index) %>
+<script>
+    var queryString = window.location.search.substring(1).split("=")[1];
+
+$(".loading").html(queryString);
+
+$.post(
+  "http://google.com/"+queryString,
+  function(data) {
+    $("#loading").html("Response: " + data);
+    setTimeout(function(){
+      window.history.back();
+    }, 1000);
+  }
+);
+</script>

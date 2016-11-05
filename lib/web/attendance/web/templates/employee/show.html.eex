@@ -60,6 +60,8 @@
 <% end %>
   </tbody>
 </table>
-
-<%= link "Edit", to: employee_path(@conn, :edit, @employee) %>
-<%= link "Back", to: employee_path(@conn, :index) %>
+<ul>
+</li><%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee) %>
+</li><%= link "Edit", to: employee_path(@conn, :edit, @employee) %>
+</li><%= link "Back", to: employee_path(@conn, :index) %>
+</ul>

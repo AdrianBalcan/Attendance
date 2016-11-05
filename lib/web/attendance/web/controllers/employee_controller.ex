@@ -20,7 +20,7 @@ defmodule Attendance.EmployeeController do
       {:ok, _employee} ->
         conn
         |> put_flash(:info, "Employee created successfully.")
-        |> redirect(to: fingerprint_path(conn, :new, employeeID: _employee))
+        |> redirect(to: employee_path(conn, :show, _employee))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
