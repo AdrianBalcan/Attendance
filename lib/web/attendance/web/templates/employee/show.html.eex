@@ -37,8 +37,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Employeeid</th>
-      <th>Template</th>
+      <th>#</th>
       <th>Active</th>
 
       <th></th>
@@ -47,8 +46,7 @@
   <tbody>
 <%= for fingerprint <- @fingerprints do %>
     <tr>
-      <td><%= fingerprint.employeeID %></td>
-      <td><%= fingerprint.template %></td>
+      <td><%= fingerprint.id %></td>
       <td><%= fingerprint.active %></td>
 
       <td class="text-right">
@@ -61,7 +59,7 @@
   </tbody>
 </table>
 <ul>
-</li><%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee) %>
-</li><%= link "Edit", to: employee_path(@conn, :edit, @employee) %>
-</li><%= link "Back", to: employee_path(@conn, :index) %>
+<li><%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee, firstname: @employee.firstname, lastname: @employee.lastname) %>
+<li><%= link "Edit", to: employee_path(@conn, :edit, @employee) %>
+<li><%= link "Back", to: employee_path(@conn, :index) %>
 </ul>

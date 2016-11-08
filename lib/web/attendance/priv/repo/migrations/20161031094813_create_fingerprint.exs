@@ -4,7 +4,7 @@ defmodule Attendance.Repo.Migrations.CreateFingerprint do
   def change do
     create table(:fingerprints) do
       add :employeeID, :integer
-      add :template, :string
+      add :template, :binary
       add :active, :boolean, default: false, null: false
 
       timestamps()

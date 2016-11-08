@@ -39,5 +39,5 @@ config :attendance, Attendance.Repo,
   username: "attendance",
   password: "attzog",
   database: "attendance_dev",
-  hostname: "db",
+  hostname: "pontaj02.zog.ro",
   pool_size: 10

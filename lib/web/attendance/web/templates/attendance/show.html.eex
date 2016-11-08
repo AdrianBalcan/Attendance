@@ -1,0 +1,13 @@
+<h2>Show attendance</h2>
+
+<ul>
+
+  <li>
+    <strong>Employeeid:</strong>
+    <%= @attendance.employeeID %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: attendance_path(@conn, :edit, @attendance) %>
+<%= link "Back", to: attendance_path(@conn, :index) %>

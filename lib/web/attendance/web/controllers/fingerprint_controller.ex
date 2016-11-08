@@ -8,9 +8,19 @@ defmodule Attendance.FingerprintController do
     render(conn, "index.html", fingerprints: fingerprints)
   end
 
-  def new(conn, _params) do
-    changeset = Fingerprint.changeset(%Fingerprint{}, _params)
-    render(conn, "new.html", changeset: changeset)
+  def new(conn, %{"employeeID" => employeeID, "firstname" => firstname, "lastname" => lastname}) do
+    body = "{\"name\": \"#{firstname} #{lastname}\", \"employeeID\": \"#{employeeID}\"}"
+
+    response = HTTPotion.post("http://pontaj-s01.zog.ro/enroll", [body: body, headers: ["Content-Type": "application/json"]])
+    
+   # cond do
+   #   String.contains?(response, "200") ->
+   #   true ->
+   #     put_flash(conn, :danger, "Eroare! Nu este conexiune cu statia!")
+   # end
+    conn
+    |> put_flash(:info, "Statia este pregatita pentru inregistrarea angajatului.")
+    |> redirect(to: employee_path(conn, :show, employeeID))
   end
 
   def create(conn, %{"fingerprint" => fingerprint_params}) do
@@ -59,7 +69,7 @@ defmodule Attendance.FingerprintController do
     Repo.delete!(fingerprint)
 
     conn
-    |> put_flash(:info, "Fingerprint deleted successfully.")
-    |> redirect(to: fingerprint_path(conn, :index))
+    |> put_flash(:info, "Statia este pregatita pentru inregistrarea angajatului.")
+    |> redirect(to: employee_path(conn, :show, fingerprint.employeeID))
   end
 end
