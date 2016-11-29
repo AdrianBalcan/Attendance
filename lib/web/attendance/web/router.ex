@@ -22,7 +22,6 @@ defmodule Attendance.Router do
     resources "/attendances", AttendanceController
   end
 
-  
   # Other scopes may use custom stacks.
   # scope "/api", Attendance do
   #   pipe_through :api
