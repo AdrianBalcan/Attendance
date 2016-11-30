@@ -1,8 +1,22 @@
 defmodule Attendance.RoomChannel do
   use Phoenix.Channel
+  require Logger
 
-  def join(room, _message, socket) do
+  def join(_room, _message, socket) do
     {:ok, socket}
+  end
+
+  def handle_in(_room, _message, socket) do
+     {:reply, :ok, socket}
+  end   
+
+  def handle_in(_room, _message, socket) do
+     {:reply, :ok, socket}
+  end   
+
+  def terminate(reason, _socket) do
+    Logger.debug"> leave #{inspect reason}"
+    :ok
   end
 
 #  def join("rooms:*", _message, socket) do

@@ -1,0 +1,23 @@
+<h2>Show device</h2>
+
+<ul>
+
+  <li>
+    <strong>Hw:</strong>
+    <%= @device.hw %>
+  </li>
+
+  <li>
+    <strong>Companyid:</strong>
+    <%= @device.companyID %>
+  </li>
+
+  <li>
+    <strong>Expire:</strong>
+    <%= @device.expire %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: device_path(@conn, :edit, @device) %>
+<%= link "Back", to: device_path(@conn, :index) %>

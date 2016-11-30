@@ -11,7 +11,7 @@ defmodule Attendance.FingerprintController do
   def new(conn, %{"employeeID" => employeeID, "firstname" => firstname, "lastname" => lastname}) do
     body = "{\"name\": \"#{firstname} #{lastname}\", \"employeeID\": \"#{employeeID}\"}"
 
-    response = HTTPotion.post("http://pontaj-s01.zog.ro/enroll", [body: body, headers: ["Content-Type": "application/json"]])
+   # response = HTTPotion.post("http://pontaj-s01.zog.ro/enroll", [body: body, headers: ["Content-Type": "application/json"]])
     
    # cond do
    #   String.contains?(response, "200") ->

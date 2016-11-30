@@ -1,0 +1,30 @@
+<h2>Listing devices</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Hw</th>
+      <th>Companyid</th>
+      <th>Expire</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for device <- @devices do %>
+    <tr>
+      <td><%= device.hw %></td>
+      <td><%= device.companyID %></td>
+      <td><%= device.expire %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: device_path(@conn, :show, device), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: device_path(@conn, :edit, device), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: device_path(@conn, :delete, device), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New device", to: device_path(@conn, :new) %>

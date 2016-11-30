@@ -17,10 +17,10 @@ defmodule Attendance.EmployeeController do
     changeset = Employee.changeset(%Employee{}, employee_params)
 
     case Repo.insert(changeset) do
-      {:ok, _employee} ->
+      {:ok, employee} ->
         conn
         |> put_flash(:info, "Employee created successfully.")
-        |> redirect(to: employee_path(conn, :show, _employee))
+        |> redirect(to: employee_path(conn, :show, employee))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
