@@ -21,6 +21,7 @@ defmodule Attendance.Router do
     resources "/fingerprints", FingerprintController
     resources "/attendances", AttendanceController
     resources "/devices", DeviceController
+    resources "/companies", CompanyController
   end
 
   # Other scopes may use custom stacks.

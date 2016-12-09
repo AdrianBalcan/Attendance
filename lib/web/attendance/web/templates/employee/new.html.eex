@@ -1,4 +1,7 @@
-<h2>New employee</h2>
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/employees">Angajati</a> <a href="#" class="current">Adaugare angajat</a></div>
+
+<h2>Adaugare angajat</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: employee_path(@conn, :create) %>

@@ -1,0 +1,59 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :name, class: "control-label" %>
+    <%= text_input f, :name, class: "form-control" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :cui, class: "control-label" %>
+    <%= text_input f, :cui, class: "form-control" %>
+    <%= error_tag f, :cui %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :nrc, class: "control-label" %>
+    <%= text_input f, :nrc, class: "form-control" %>
+    <%= error_tag f, :nrc %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :adresa, class: "control-label" %>
+    <%= text_input f, :adresa, class: "form-control" %>
+    <%= error_tag f, :adresa %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :localitate, class: "control-label" %>
+    <%= text_input f, :localitate, class: "form-control" %>
+    <%= error_tag f, :localitate %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :judet, class: "control-label" %>
+    <%= text_input f, :judet, class: "form-control" %>
+    <%= error_tag f, :judet %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :telefon, class: "control-label" %>
+    <%= number_input f, :telefon, class: "form-control" %>
+    <%= error_tag f, :telefon %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :user, class: "control-label" %>
+    <%= number_input f, :user, class: "form-control" %>
+    <%= error_tag f, :user %>
+  </div>
+
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

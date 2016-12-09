@@ -8,8 +8,8 @@
   </li>
 
   <li>
-    <strong>Companyid:</strong>
-    <%= @device.companyID %>
+    <strong>Userid:</strong>
+    <%= @device.userID %>
   </li>
 
   <li>

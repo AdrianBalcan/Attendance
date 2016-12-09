@@ -3,7 +3,7 @@ defmodule Attendance.Device do
 
   schema "devices" do
     field :hw, :string
-    field :companyID, :integer
+    field :userID, :integer
     field :expire, Ecto.Date
 
     timestamps()
@@ -14,7 +14,7 @@ defmodule Attendance.Device do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:hw, :companyID, :expire])
-    |> validate_required([:hw, :companyID, :expire])
+    |> cast(params, [:hw, :userID, :expire])
+    |> validate_required([:hw, :userID, :expire])
   end
 end

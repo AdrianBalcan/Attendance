@@ -9,7 +9,7 @@ defmodule Attendance.FingerprintController do
   end
 
   def new(conn, %{"employeeID" => employeeID, "firstname" => firstname, "lastname" => lastname}) do
-    body = "{\"name\": \"#{firstname} #{lastname}\", \"employeeID\": \"#{employeeID}\"}"
+   #    body = "{\"name\": \"#{firstname} #{lastname}\", \"employeeID\": \"#{employeeID}\"}"
 
    # response = HTTPotion.post("http://pontaj-s01.zog.ro/enroll", [body: body, headers: ["Content-Type": "application/json"]])
     

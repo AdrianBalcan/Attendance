@@ -1,36 +1,49 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A prodaauctive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
-
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+<!--breadcrumbs-->
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
   </div>
+<!--End-breadcrumbs-->
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
-  </div>
-</div>
+<!--Action boxes-->
+  <div class="container-fluid">
+    <div class="quick-actions_homepage">
+      <ul class="quick-actions">
+        <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Panou principal </a> </li>
+        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Statistici</a> </li>
+        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> SMS </a> </li>
+        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Rapoarte</a> </li>
+        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Setari</a> </li>
+        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Dispozitive</a> </li>
+        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Utilizatori</a> </li>
+        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Concedii</a> </li>
+        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
+        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Errori</a> </li>
+
+      </ul>
+    </div>
+<!--End-Action boxes-->
+
+<!--Chart-box-->
+    <div class="row-fluid">
+      <div class="widget-box">
+        <div class="widget-title bg_lg"><span class="icon"><i class="icon-signal"></i></span>
+          <h5>Site Analytics</h5>
+        </div>
+        <div class="widget-content" >
+          <div class="row-fluid">
+            <div class="span9">
+              <div class="chart"></div>
+            </div>
+            <div class="span3">
+              <ul class="site-stats">
+                <li class="bg_lh"><i class="icon-user"></i> <strong>50</strong> <small>Total Angajati</small></li>
+                <li class="bg_lh"><i class="icon-plus"></i> <strong>Adauga</strong> <small>Angajati </small></li>
+                <li class="bg_lh"><i class="icon-shopping-cart"></i> <strong>656</strong> <small>Ore lucrate</small></li>
+                <li class="bg_lh"><i class="icon-tag"></i> <strong>4</strong> <small>Notificari</small></li>
+                <li class="bg_lh"><i class="icon-repeat"></i> <strong>4</strong> <small>Concedii</small></li>
+                <li class="bg_lh"><i class="icon-globe"></i> <strong>48</strong> <small>Prezenti acum</small></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>

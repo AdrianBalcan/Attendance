@@ -2,7 +2,7 @@ defmodule Attendance.DeviceControllerTest do
   use Attendance.ConnCase
 
   alias Attendance.Device
-  @valid_attrs %{companyID: 42, expire: %{day: 17, month: 4, year: 2010}, hw: "some content"}
+  @valid_attrs %{userID: 42, expire: %{day: 17, month: 4, year: 2010}, hw: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

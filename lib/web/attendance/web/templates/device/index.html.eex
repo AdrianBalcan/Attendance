@@ -1,10 +1,15 @@
-<h2>Listing devices</h2>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Dispozitive</a> </div>
 
+  </div>
+<h2>Dispozitive</h2>
+
+<div class="pull-right"> <%= link "Adauga Dispozitiv", to: device_path(@conn, :new), class: "btn btn-primary btn-xs" %></div>
 <table class="table">
   <thead>
     <tr>
       <th>Hw</th>
-      <th>Companyid</th>
+      <th>Userid</th>
       <th>Expire</th>
 
       <th></th>
@@ -14,7 +19,7 @@
 <%= for device <- @devices do %>
     <tr>
       <td><%= device.hw %></td>
-      <td><%= device.companyID %></td>
+      <td><%= device.userID %></td>
       <td><%= device.expire %></td>
 
       <td class="text-right">
@@ -27,4 +32,3 @@
   </tbody>
 </table>
 
-<%= link "New device", to: device_path(@conn, :new) %>

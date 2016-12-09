@@ -3,6 +3,7 @@ defmodule Attendance.UserSocket do
 
   ## Channels
   channel "sp:*", Attendance.RoomChannel
+  channel "rooms:*", Attendance.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

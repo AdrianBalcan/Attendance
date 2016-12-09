@@ -4,7 +4,7 @@ defmodule Attendance.Repo.Migrations.CreateDevice do
   def change do
     create table(:devices) do
       add :hw, :text
-      add :companyID, :integer
+      add :userID, :integer
       add :expire, :date
 
       timestamps()

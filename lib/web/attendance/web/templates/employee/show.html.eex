@@ -1,4 +1,7 @@
-<h2>Show employee</h2>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/employees">Angajati</a> <a href="#" class="current">Detalii angajat</a></div>
+
+<h2>Detalii angajat</h2>
 
 <ul>
 

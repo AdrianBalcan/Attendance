@@ -7,59 +7,134 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Attendance!</title>
+    <title>Pontaj Digital</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
   </head>
-
   <body>
-    <div class="container">
-      <header class="header">
-        <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Pontaj</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meniu <span class="caret"></span></a>
+<!--Header-part-->
+<div id="header">
+  <h1><a href="dashboard.html">Pontaj Digital</a></h1>
+</div>
+<!--close-Header-part-->
+
+
+    <!--top-Header-menu-->
+    <div id="user-nav" class="navbar navbar-inverse">
+      <ul class="nav">
+        <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Administrator</span><b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="/employees">Angajati</a></li>
-            <li><a href="/devices">Dispozitive</a></li>
-            <li><a href="/attendances">Prezenta</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="#"><i class="icon-user"></i>Profil</a></li>
+            <li class="divider"></li>
+            <li><a href="#"><i class="icon-check"></i>Notite</a></li>
+            <li class="divider"></li>
+            <li><a href="/logout"><i class="icon-key"></i>Deconectare</a></li>
           </ul>
         </li>
+        <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Mesaje</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> mesaj nou</a></li>
+            <li class="divider"></li>
+            <li><a class="sInbox" title="" href="#"><i class="icon-envelope"></i> inbox</a></li>
+            <li class="divider"></li>
+            <li><a class="sOutbox" title="" href="#"><i class="icon-arrow-up"></i> outbox</a></li>
+            <li class="divider"></li>
+            <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
+          </ul>
+        </li>
+        <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Setari</span></a></li>
+        <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-      </header>
+    </div>
+    <!--close-top-Header-menu-->
+    <!--start-top-serch-->
+    <div id="search">
+      <input type="text" placeholder="Search here..."/>
+      <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+    </div>
+    <!--close-top-serch-->
+    <!--sidebar-menu-->
+    <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Panou principal</a>
+      <ul>
+        <li><a href="/"><i class="icon icon-home"></i> <span>Panou principal</span></a> </li>
+        <li> <a href="#"><i class="icon icon-signal"></i> <span>Statistici</span></a> </li>
+        <li> <a href="#"><i class="icon icon-inbox"></i> <span>Rapoarte</span></a> </li>
+        <li><a href="/employees"><i class="icon icon-th"></i> <span>Angajati</span></a></li>
+        <li><a href="#"><i class="icon icon-fullscreen"></i> <span>Adauga angajat</span></a></li>
+        <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Notificari</span> <span class="label label-important">3</span></a>
+          <ul>
+            <li><a href="#">Basic Form</a></li>
+            <li><a href="#">Form with Validation</a></li>
+            <li><a href="#">Form with Wizard</a></li>
+          </ul>
+        </li>
+        <li><a href="#"><i class="icon icon-pencil"></i> <span>Utilizatori</span></a></li>
+        <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Alerte</span> <span class="label label-important">5</span></a>
+          <ul>
+            <li><a href="#">Alerte 1</a></li>
+            <li><a href="#">Alerte 2</a></li>
+          </ul>
+        </li>
+        <li class="submenu"> <a href="/devices"><i class="icon icon-info-sign"></i> <span>Dispozitive</span> <span class="label label-important">2</span></a>
+          <ul>
+            <li><a href="error403.html">Pontaj 1: OK</a></li>
+            <li><a href="error404.html">Pontaj 2: Error</a></li>
+          </ul>
+        </li>
+        <li class="content"> <span>Prezenta in timp real</span>
+          <div class="progress progress-mini progress-danger active progress-striped">
+            <div style="width: 90%;" class="bar"></div>
+          </div>
+          <span class="percent">90%</span>
+          <div class="stat">45/50</div>
+        </li>
+        <li class="content"> <span>Spatiu ocupat</span>
+          <div class="progress progress-mini active progress-striped">
+            <div style="width: 30%;" class="bar"></div>
+          </div>
+          <span class="percent">30%</span>
+          <div class="stat">210 Angajati</div>
+        </li>
+      </ul>
+    </div>
+    <!--sidebar-menu-->
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
+    <!--main-container-part-->
+    <div id="content">
+      <!--TODO: phoeonix alerts-->
+      <%= get_flash(@conn, :info) %>
+      <%= get_flash(@conn, :error) %>
+  
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
 
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+     </div>
+<script type="text/javascript">
+  // This function is called from the pop-up menus to transfer to
+  // a different page. Ignore if the value returned is a null string:
+  function goPage (newURL) {
+
+      // if url is empty, skip the menu dividers and reset the menu selection to default
+      if (newURL != "") {
+
+          // if url is "-", it is this page -- reset the menu:
+          if (newURL == "-" ) {
+              resetMenu();
+          }
+          // else, send page to designated URL
+          else {
+            document.location.href = newURL;
+          }
+      }
+  }
+
+// resets the menu selection upon entry to this page:
+function resetMenu() {
+   document.gomenu.selector.selectedIndex = 2;
+}
+</script>
+     <script src="<%= static_path(@conn, "/js/app.js") %>"></script> 
   </body>
 </html>

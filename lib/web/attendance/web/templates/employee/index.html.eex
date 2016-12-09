@@ -1,5 +1,11 @@
-<h2>Listing employees</h2>
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Angajati</a> </div>
+    <h1>Angajati</h1>
+  </div>
 
+    <div class="pull-right">
+    <%= link "Adauga angajat", to: employee_path(@conn, :new), class: "btn btn-primary btn-xs" %>
+    </div>
 <table class="table">
   <thead>
     <tr>
@@ -7,8 +13,6 @@
       <th>Prenume</th>
       <th>Pozitie</th>
       <th>Echipa</th>
-      <th>Data nasterii</th>
-      <th>Activ</th>
 
       <th></th>
     </tr>
@@ -20,8 +24,6 @@
       <td><%= employee.lastname %></td>
       <td><%= employee.job %></td>
       <td><%= employee.team %></td>
-      <td><%= employee.dob %></td>
-      <td><%= employee.active %></td>
 
       <td class="text-right">
         <%= link "Show", to: employee_path(@conn, :show, employee), class: "btn btn-default btn-xs" %>
@@ -33,4 +35,3 @@
   </tbody>
 </table>
 
-<%= link "New employee", to: employee_path(@conn, :new) %>

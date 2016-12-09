@@ -1,3 +1,8 @@
+<div id="breadcrumb"> 
+  <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+  <a href="/devices">Dispozitive</a> 
+<a href="#" class="current">Adaugare dispozitiv</a>
+</div>
 <h2>New device</h2>
 
 <%= render "form.html", changeset: @changeset,
