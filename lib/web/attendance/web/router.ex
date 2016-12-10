@@ -16,7 +16,12 @@ defmodule Attendance.Router do
   scope "/", Attendance do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", SessionController, :new
+    post "/login", SessionController, :create
+    get "/logout", SessionController, :delete
+    get "/stats", PageController, :index
+    get "/registration", RegistrationController, :new
+    post "/registration", RegistrationController, :create
     resources "/employees", EmployeeController
     resources "/fingerprints", FingerprintController
     resources "/attendances", AttendanceController

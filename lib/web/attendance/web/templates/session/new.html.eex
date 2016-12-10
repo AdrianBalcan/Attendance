@@ -1,0 +1,55 @@
+
+
+
+
+
+
+<div id="loginbox">            
+  <%= form_for @changeset, session_path(@conn, :create), [class: "form-vertical", id: "loginform"], fn f -> %>
+    <%= if f.errors != [] do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below:</p>
+        <ul>
+          <%= for {attr, message} <- f.errors do %>
+            <li><%= humanize(attr) %> aaaaa <%= message %></li>
+            aaaa
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+	        <div class="control-group normal_text"> <h3><img src="images/logo.png" alt="Logo" /></h3></div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lg"><i class="icon-user"> </i></span><%= text_input f, :email, placeholder: "Email" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_ly"><i class="icon-lock"></i></span><%= password_input f, :password, placeholder: "Parola" %>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-info" id="to-recover">Recuperare Parola</a></span>
+                    <span class="pull-right"><%= submit "Autentificare", class: "btn btn-success" %></span>
+                </div>
+            </form>
+            <form id="recoverform" action="#" class="form-vertical">
+				<p class="normal_text">Enter your e-mail address below and we will send you instructions how to recover a password.</p>
+				
+                    <div class="controls">
+                        <div class="main_input_box">
+                            <span class="add-on bg_lo"><i class="icon-envelope"></i></span><input type="text" placeholder="E-mail address" />
+                        </div>
+                    </div>
+               
+                <div class="form-actions">
+                    <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
+                    <span class="pull-right"><a class="btn btn-info"/>Recover</a></span>
+                </div>
+            </form>
+        </div>
+<% end %>

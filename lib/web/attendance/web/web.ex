@@ -31,6 +31,7 @@ defmodule Attendance.Web do
       use Phoenix.Controller
 
       alias Attendance.Repo
+      alias Attendance.User
       import Ecto
       import Ecto.Query
 

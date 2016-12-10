@@ -105,7 +105,6 @@
       <!--TODO: phoeonix alerts-->
       <%= get_flash(@conn, :info) %>
       <%= get_flash(@conn, :error) %>
-  
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>

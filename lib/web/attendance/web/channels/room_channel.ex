@@ -24,9 +24,9 @@ defmodule Attendance.RoomChannel do
     :ok
   end
 
-  def join("rooms:*", _message, socket) do
-    {:ok, socket}
-  end
+#  def join("rooms:*", _message, socket) do
+#    {:ok, socket}
+#  end
 #  def join(_room, _params, _socket) do
 #    {:error, %{reason: "you can only join the lobby"}}
 #  end

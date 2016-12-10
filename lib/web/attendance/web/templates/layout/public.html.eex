@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pontaj Digital</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/matrix-login.css") %>">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+     <script src="<%= static_path(@conn, "/js/app.js") %>"></script> 
+<script>
+function notify(text){
+        $.gritter.add({
+                text:   text,
+                sticky: false
+         })
+}
+</script>
+      <!--TODO: phoeonix alerts-->
+<script>
+var text = "<%= get_flash(@conn, :info) %><%= get_flash(@conn, :error) %>";
+    if(text.length > 0){
+      notify(text)
+    }
+</script>
+  </body>
+</html>
