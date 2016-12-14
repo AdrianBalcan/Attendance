@@ -1,6 +1,7 @@
 defmodule Attendance.DeviceController do
   use Attendance.Web, :controller
 
+  plug Attendance.Plug.Authenticate
   alias Attendance.Device
 
   def index(conn, _params) do

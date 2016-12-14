@@ -15,7 +15,7 @@
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">Pontaj Digital</a></h1>
+  <h1><a href="/">Pontaj Digital</a></h1>
 </div>
 <!--close-Header-part-->
 
@@ -23,7 +23,7 @@
     <!--top-Header-menu-->
     <div id="user-nav" class="navbar navbar-inverse">
       <ul class="nav">
-        <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text">Administrator</span><b class="caret"></b></a>
+        <li  class="dropdown" id="profile-messages" ><a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i>  <span class="text"><%= @current_user.firstname %></span><b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="#"><i class="icon-user"></i>Profil</a></li>
             <li class="divider"></li>
@@ -44,7 +44,7 @@
           </ul>
         </li>
         <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Setari</span></a></li>
-        <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+        <li class=""><a title="" href="/logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
       </ul>
     </div>
     <!--close-top-Header-menu-->
@@ -59,9 +59,9 @@
       <ul>
         <li><a href="/"><i class="icon icon-home"></i> <span>Panou principal</span></a> </li>
         <li> <a href="#"><i class="icon icon-signal"></i> <span>Statistici</span></a> </li>
-        <li> <a href="#"><i class="icon icon-inbox"></i> <span>Rapoarte</span></a> </li>
+        <li> <a href="/attendances"><i class="icon icon-inbox"></i> <span>Rapoarte</span></a> </li>
         <li><a href="/employees"><i class="icon icon-th"></i> <span>Angajati</span></a></li>
-        <li><a href="#"><i class="icon icon-fullscreen"></i> <span>Adauga angajat</span></a></li>
+        <li><a href="/devices"><i class="icon icon-fullscreen"></i> <span>Dispozitive</span></a></li>
         <li class="submenu"> <a href="#"><i class="icon icon-th-list"></i> <span>Notificari</span> <span class="label label-important">3</span></a>
           <ul>
             <li><a href="#">Basic Form</a></li>
@@ -76,12 +76,13 @@
             <li><a href="#">Alerte 2</a></li>
           </ul>
         </li>
-        <li class="submenu"> <a href="/devices"><i class="icon icon-info-sign"></i> <span>Dispozitive</span> <span class="label label-important">2</span></a>
+        <!-- <li class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>Dispozitive</span> <span class="label label-important">2</span></a>
           <ul>
             <li><a href="error403.html">Pontaj 1: OK</a></li>
             <li><a href="error404.html">Pontaj 2: Error</a></li>
           </ul>
         </li>
+-->
         <li class="content"> <span>Prezenta in timp real</span>
           <div class="progress progress-mini progress-danger active progress-striped">
             <div style="width: 90%;" class="bar"></div>

@@ -1,6 +1,7 @@
 defmodule Attendance.EmployeeController do
   use Attendance.Web, :controller
 
+  plug Attendance.Plug.Authenticate
   alias Attendance.Employee
 
   def index(conn, _params) do

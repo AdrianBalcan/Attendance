@@ -1,6 +1,14 @@
 defmodule Attendance.AttendanceController do
   use Attendance.Web, :controller
 
+  plug Attendance.Plug.Authenticate
+
+  def put_headers(conn, key_values) do
+    Enum.reduce key_values, conn, fn {k, v}, conn ->
+      put_resp_header(conn, to_string(k), v)
+    end
+  end
+
   alias Attendance.Attendance
 
   def index(conn, _params) do

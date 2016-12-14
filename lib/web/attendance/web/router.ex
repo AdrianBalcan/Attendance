@@ -17,6 +17,7 @@ defmodule Attendance.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", SessionController, :new
+    get "/login", SessionController, :new
     post "/login", SessionController, :create
     get "/logout", SessionController, :delete
     get "/stats", PageController, :index

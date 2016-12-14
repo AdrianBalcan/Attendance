@@ -41,3 +41,7 @@ config :attendance, Attendance.Repo,
   database: "attendance_dev",
   hostname: "pontaj02.zog.ro",
   pool_size: 10
+
+config :phoenix, Attendance.Router,
+  session: [store: :cookie,
+            key: "weeee"]

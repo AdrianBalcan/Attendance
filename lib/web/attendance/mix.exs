@@ -39,6 +39,7 @@ defmodule Attendance.Mixfile do
      {:gettext, "~> 0.11"},
      {:httpotion, "~> 3.0.2"},
      {:cowboy, "~> 1.0"},
+     {:plug, "~>1.3"},
      {:comeonin, "~> 3.0"}]
   end
 

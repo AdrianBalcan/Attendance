@@ -1,6 +1,7 @@
 defmodule Attendance.RegistrationController do
   use Attendance.Web, :controller
   
+#  plug Attendance.Plug.Authenticate
   alias Attendance.Password
 
   require Logger
@@ -16,15 +17,19 @@ defmodule Attendance.RegistrationController do
   def create(conn, %{"user" => user_params}) do
     changeset = User.changeset(%User{}, user_params)
     if changeset.valid? do
-      new_user = Password.generate_password_and_store_user(changeset)
-
-      conn
-        |> put_flash(:info, "Successfully registered and logged in")
-        |> put_session(:current_user, new_user)
-        |> redirect(to: page_path(conn, :index))
+      changeset = (Password.generate_password(changeset))
+      case Repo.insert(changeset) do
+        {:ok, changeset} ->
+          conn
+            |> put_flash(:info, "Contul dumneavoastra a fost creat!")
+            |> redirect(to: session_path(conn, :new))
+        {:error, changeset} ->
+          conn
+            |> put_flash(:info, "Un cont cu aceasta adresa de email exista deja!")
+            |> render("new.html", changeset: changeset)
+      end
     else
       render conn, "new.html", changeset: changeset
     end
   end
-
 end

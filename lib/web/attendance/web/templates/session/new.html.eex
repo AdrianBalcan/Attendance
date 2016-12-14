@@ -1,9 +1,3 @@
-
-
-
-
-
-
 <div id="loginbox">            
   <%= form_for @changeset, session_path(@conn, :create), [class: "form-vertical", id: "loginform"], fn f -> %>
     <%= if f.errors != [] do %>
@@ -11,8 +5,7 @@
         <p>Oops, something went wrong! Please check the errors below:</p>
         <ul>
           <%= for {attr, message} <- f.errors do %>
-            <li><%= humanize(attr) %> aaaaa <%= message %></li>
-            aaaa
+            <li><%= humanize(attr) %> <%= message %></li>
           <% end %>
         </ul>
       </div>

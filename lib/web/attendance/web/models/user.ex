@@ -9,10 +9,11 @@ defmodule Attendance.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
 
+    has_many :companies, Attendance.Company
     timestamps()
   end
   
-  @required_fields ~w(firstname lastname email password password_confirmation)
+  @required_fields ~w(firstname lastname email password password_confirmation companies)
   @optional_fields ~w()
 
   @doc """

@@ -9,7 +9,8 @@ defmodule Attendance.Company do
     field :localitate, :string
     field :judet, :string
     field :telefon, :integer
-    field :user, :integer
+
+    belongs_to :user, Attendance.User
 
     timestamps()
   end
@@ -19,7 +20,7 @@ defmodule Attendance.Company do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :cui, :nrc, :adresa, :localitate, :judet, :telefon, :user])
-    |> validate_required([:name, :cui, :nrc, :adresa, :localitate, :judet, :telefon, :user])
+    |> cast(params, [:name, :cui, :nrc, :adresa, :localitate, :judet, :telefon])
+    |> validate_required([:name])
   end
 end
