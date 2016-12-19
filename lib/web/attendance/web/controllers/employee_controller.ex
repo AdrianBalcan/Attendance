@@ -3,18 +3,26 @@ defmodule Attendance.EmployeeController do
 
   plug Attendance.Plug.Authenticate
   alias Attendance.Employee
+  alias Attendance.Company
 
   def index(conn, _params) do
-    employees = Repo.all(Employee)
+    current_user_id = get_session(conn, :current_user).id
+    companies = Repo.all(from f in Attendance.Company, [select: {f.id}, where: f.user_id == ^current_user_id])
+    IO.inspect companies
+    employees = Repo.all(from f in Employee, [where: f.companies_id == ^1])
     render(conn, "index.html", employees: employees)
   end
 
   def new(conn, _params) do
+    current_user_id = get_session(conn, :current_user).id
+    companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
     changeset = Employee.changeset(%Employee{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, companies: companies)
   end
 
   def create(conn, %{"employee" => employee_params}) do
+    current_user_id = get_session(conn, :current_user).id
+    employee_params = Map.put(employee_params, "user_id", to_string(current_user_id))
     changeset = Employee.changeset(%Employee{}, employee_params)
 
     case Repo.insert(changeset) do
@@ -28,15 +36,24 @@ defmodule Attendance.EmployeeController do
   end
 
   def show(conn, %{"id" => id}) do
-    fingerprints = Repo.all(from f in Attendance.Fingerprint, where: f.employeeID == ^id)
-    employee = Repo.get!(Employee, id)
-    render(conn, "show.html", employee: employee, fingerprints: fingerprints)
+    current_user_id = get_session(conn, :current_user).id
+#   employee = Repo.get!(Employee, id)
+    employee = join(Employee, :inner, [], companies)
+        |> Repo.all
+    if(employee.user_id != current_user_id) do
+      redirect(conn, to: employee_path(conn, :index))
+    else
+      fingerprints = Repo.all(from f in Attendance.Fingerprint, where: f.employeeID == ^id)
+      render(conn, "show.html", employee: employee, fingerprints: fingerprints)
+    end
   end
 
   def edit(conn, %{"id" => id}) do
     employee = Repo.get!(Employee, id)
     changeset = Employee.changeset(employee)
-    render(conn, "edit.html", employee: employee, changeset: changeset)
+    current_user_id = get_session(conn, :current_user).id
+    companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
+    render(conn, "edit.html", employee: employee, changeset: changeset, companies: companies)
   end
 
   def update(conn, %{"id" => id, "employee" => employee_params}) do

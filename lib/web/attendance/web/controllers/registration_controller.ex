@@ -1,6 +1,10 @@
 defmodule Attendance.RegistrationController do
   use Attendance.Web, :controller
   
+  alias Attendance.User
+
+  plug :scrub_params, "user" when action in [:create, :update]
+
 #  plug Attendance.Plug.Authenticate
   alias Attendance.Password
 
@@ -10,12 +14,16 @@ defmodule Attendance.RegistrationController do
 #  plug :action
 
   def new(conn, _params) do
-    changeset = User.changeset(%User{})
+    changeset = User.changeset(%User{companies: [
+                                        %Attendance.Company{name: ""},
+                                      ]
+                           })
     render conn, changeset: changeset
   end
 
   def create(conn, %{"user" => user_params}) do
     changeset = User.changeset(%User{}, user_params)
+    IO.inspect changeset
     if changeset.valid? do
       changeset = (Password.generate_password(changeset))
       case Repo.insert(changeset) do

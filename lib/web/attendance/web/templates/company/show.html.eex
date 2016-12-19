@@ -38,8 +38,8 @@
   </li>
 
   <li>
-    <strong>User:</strong>
-    <%= @company.user %>
+    <strong>User_id:</strong>
+    <%= @company.user_id %>
   </li>
 </ul>
 

@@ -67,7 +67,7 @@ defmodule Attendance.SessionController do
         conn
           |> put_session(:current_user, user)
           |> put_session(:second_fa, second_fa)
-          |> configure_session(renew: true)
+          #|> configure_session(renew: true)
           |> redirect(to: page_path(conn, :index))
       true ->
         conn

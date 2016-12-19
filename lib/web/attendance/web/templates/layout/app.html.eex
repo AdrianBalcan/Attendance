@@ -69,7 +69,7 @@
             <li><a href="#">Form with Wizard</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="icon icon-pencil"></i> <span>Utilizatori</span></a></li>
+        <li><a href="companies"><i class="icon icon-pencil"></i> <span>Companii/Proiecte</span></a></li>
         <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Alerte</span> <span class="label label-important">5</span></a>
           <ul>
             <li><a href="#">Alerte 1</a></li>

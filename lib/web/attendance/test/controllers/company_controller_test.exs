@@ -2,7 +2,7 @@ defmodule Attendance.CompanyControllerTest do
   use Attendance.ConnCase
 
   alias Attendance.Company
-  @valid_attrs %{adresa: "some content", cui: "some content", judet: "some content", localitate: "some content", name: "some content", nrc: "some content", telefon: 42, user: 42}
+  @valid_attrs %{adresa: "some content", cui: "some content", judet: "some content", localitate: "some content", name: "some content", nrc: "some content", telefon: 42, user_id: 1}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

@@ -5,7 +5,8 @@ defmodule Attendance.CompanyController do
   alias Attendance.Company
 
   def index(conn, _params) do
-    companies = Repo.all(Company)
+    current_user_id = get_session(conn, :current_user).id
+    companies = from(p in Company, where: p.user_id == ^current_user_id) |> Repo.all
     render(conn, "index.html", companies: companies)
   end
 
@@ -15,8 +16,9 @@ defmodule Attendance.CompanyController do
   end
 
   def create(conn, %{"company" => company_params}) do
+    current_user_id = get_session(conn, :current_user).id
+    company_params = Map.put(company_params, "user_id", to_string(current_user_id))
     changeset = Company.changeset(%Company{}, company_params)
-
     case Repo.insert(changeset) do
       {:ok, _company} ->
         conn
@@ -28,8 +30,13 @@ defmodule Attendance.CompanyController do
   end
 
   def show(conn, %{"id" => id}) do
+    current_user_id = get_session(conn, :current_user).id
     company = Repo.get!(Company, id)
-    render(conn, "show.html", company: company)
+    if(company.user_id != current_user_id) do
+      redirect(conn, to: company_path(conn, :index))
+    else
+      render(conn, "show.html", company: company)
+    end
   end
 
   def edit(conn, %{"id" => id}) do

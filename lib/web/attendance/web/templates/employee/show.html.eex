@@ -16,6 +16,11 @@
   </li>
 
   <li>
+    <strong>Companie/Proiect:</strong>
+    <%= @employee.companies_id %>
+  </li>
+
+  <li>
     <strong>Job:</strong>
     <%= @employee.job %>
   </li>

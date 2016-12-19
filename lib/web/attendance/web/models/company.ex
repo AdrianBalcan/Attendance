@@ -15,12 +15,20 @@ defmodule Attendance.Company do
     timestamps()
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [:name, :cui, :nrc, :adresa, :localitate, :judet, :telefon])
-    |> validate_required([:name])
+  @required_fields ~w(name)
+  @optional_fields ~w(user_id cui nrc adresa localitate judet telefon)
+
+  def changeset(model, params \\ %{}) do
+    model
+    |> cast(params, @required_fields, @optional_fields)
   end
+
+#  @doc """
+#  Builds a changeset based on the `struct` and `params`.
+#  """
+#  def changeset(struct, params \\ %{}) do
+#    struct
+#    |> cast(params, [:name, :cui, :nrc, :adresa, :localitate, :judet, :telefon])
+#    |> validate_required([:name])
+#  end
 end

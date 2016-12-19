@@ -8,6 +8,9 @@ defmodule Attendance.Employee do
     field :team, :string
     field :dob, Ecto.Date
     field :active, :boolean, default: false
+    field :user_id, :integer
+
+    belongs_to :companies, Attendance.Company
 
     timestamps()
   end
@@ -17,7 +20,7 @@ defmodule Attendance.Employee do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:firstname, :lastname, :job, :team, :dob, :active])
+    |> cast(params, [:firstname, :lastname, :companies_id, :job, :team, :dob, :active])
     |> validate_required([:firstname, :lastname, :job, :team, :dob, :active])
   end
 end

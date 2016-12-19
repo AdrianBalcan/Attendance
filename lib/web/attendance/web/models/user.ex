@@ -10,18 +10,19 @@ defmodule Attendance.User do
     field :password_confirmation, :string, virtual: true
 
     has_many :companies, Attendance.Company
+
     timestamps()
   end
   
-  @required_fields ~w(firstname lastname email password password_confirmation companies)
+  @required_fields ~w(firstname lastname email password password_confirmation)
   @optional_fields ~w()
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
+    cast(model, params, ~w(firstname lastname email password password_confirmation))
+    |> cast_assoc(:companies)
     |> validate_required([:firstname, :lastname, :email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email, on: Attendance.Repo, downcase: true)

@@ -36,12 +36,9 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :attendance, Attendance.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "attendance",
-  password: "attzog",
-  database: "attendance_dev",
-  hostname: "pontaj02.zog.ro",
+  username: "attendance_test",
+  password: "attzogtest",
+  database: "attendance_test",
+  hostname: "internal.zog.ro",
   pool_size: 10
 
-config :phoenix, Attendance.Router,
-  session: [store: :cookie,
-            key: "weeee"]
