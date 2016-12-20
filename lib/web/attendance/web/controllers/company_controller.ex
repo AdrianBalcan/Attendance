@@ -52,8 +52,12 @@ defmodule Attendance.CompanyController do
 
   def update(conn, %{"id" => id, "company" => company_params}) do
     current_user_id = get_session(conn, :current_user).id
-    if(to_string(current_user_id) == id) do
-      company = Repo.get!(Company, id)
+    company = Repo.get!(Company, id)
+    if(company.user_id != current_user_id) do
+      conn
+      |> put_flash(:info, "Eroare la modificarea datelor! Incearca din nou!")
+      |> redirect(to: company_path(conn, :index))
+    else
       changeset = Company.changeset(company, company_params)
       case Repo.update(changeset) do
         {:ok, company} ->
@@ -63,10 +67,6 @@ defmodule Attendance.CompanyController do
         {:error, changeset} ->
           render(conn, "edit.html", company: company, changeset: changeset)
       end
-    else
-      conn
-      |> put_flash(:info, "Eroare in modificarea datelor.")
-      |> redirect(to: company_path(conn, :index))
     end
 
   end
