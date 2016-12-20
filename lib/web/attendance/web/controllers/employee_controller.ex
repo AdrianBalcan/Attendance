@@ -27,7 +27,7 @@ defmodule Attendance.EmployeeController do
     case Repo.insert(changeset) do
       {:ok, employee} ->
         conn
-        |> put_flash(:info, "Employee created successfully.")
+        |> put_flash(:info, "Angajatul a fost adaugat!")
         |> redirect(to: employee_path(conn, :show, employee))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -46,36 +46,50 @@ defmodule Attendance.EmployeeController do
   end
 
   def edit(conn, %{"id" => id}) do
-    employee = Repo.get!(Employee, id)
-    changeset = Employee.changeset(employee)
     current_user_id = get_session(conn, :current_user).id
-    companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
-    render(conn, "edit.html", employee: employee, changeset: changeset, companies: companies)
-  end
-
-  def update(conn, %{"id" => id, "employee" => employee_params}) do
-    employee = Repo.get!(Employee, id)
-    changeset = Employee.changeset(employee, employee_params)
-
-    case Repo.update(changeset) do
-      {:ok, employee} ->
-        conn
-        |> put_flash(:info, "Employee updated successfully.")
-        |> redirect(to: employee_path(conn, :show, employee))
-      {:error, changeset} ->
-        render(conn, "edit.html", employee: employee, changeset: changeset)
+    [secure] = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, select: c.user_id, where: e.id == ^id)
+    if secure != current_user_id do
+      conn
+      |> put_flash(:error, "Eroare la modificarea datelor! Incearca din nou!")
+      |> redirect(to: employee_path(conn, :index))
+    else
+      companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
+      employee = Repo.get!(Employee, id)
+      changeset = Employee.changeset(employee)
+      render(conn, "edit.html", employee: employee, changeset: changeset, companies: companies)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    employee = Repo.get!(Employee, id)
+  def update(conn, %{"id" => id, "employee" => employee_params}) do
+    current_user_id = get_session(conn, :current_user).id
+    if(to_string(current_user_id) == id) do
+      employee = Repo.get!(Employee, id)
+      changeset = Employee.changeset(employee, employee_params)
 
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(employee)
-
-    conn
-    |> put_flash(:info, "Employee deleted successfully.")
-    |> redirect(to: employee_path(conn, :index))
+      case Repo.update(changeset) do
+        {:ok, employee} ->
+          conn
+          |> put_flash(:info, "Datele au fost modificate!")
+          |> redirect(to: employee_path(conn, :show, employee))
+        {:error, changeset} ->
+          render(conn, "edit.html", employee: employee, changeset: changeset)
+      end
+    else
+      conn
+      |> put_flash(:error, "Eroare la modificarea datelor! Incearca din nou!")
+      |> redirect(to: employee_path(conn, :index))
+    end
   end
+
+#  def delete(conn, %{"id" => id}) do
+#    employee = Repo.get!(Employee, id)
+#
+#    # Here we use delete! (with a bang) because we expect
+#    # it to always work (and if it does not, it will raise).
+#    Repo.delete!(employee)
+#
+#    conn
+#    |> put_flash(:info, "Employee deleted successfully.")
+#    |> redirect(to: employee_path(conn, :index))
+#  end
 end
