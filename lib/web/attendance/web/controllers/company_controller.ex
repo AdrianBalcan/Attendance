@@ -40,23 +40,35 @@ defmodule Attendance.CompanyController do
   end
 
   def edit(conn, %{"id" => id}) do
+    current_user_id = get_session(conn, :current_user).id
     company = Repo.get!(Company, id)
-    changeset = Company.changeset(company)
-    render(conn, "edit.html", company: company, changeset: changeset)
+    if(company.user_id != current_user_id) do
+      redirect(conn, to: company_path(conn, :index))
+    else
+      changeset = Company.changeset(company)
+      render(conn, "edit.html", company: company, changeset: changeset)
+    end
   end
 
   def update(conn, %{"id" => id, "company" => company_params}) do
-    company = Repo.get!(Company, id)
-    changeset = Company.changeset(company, company_params)
-
-    case Repo.update(changeset) do
-      {:ok, company} ->
-        conn
-        |> put_flash(:info, "Company updated successfully.")
-        |> redirect(to: company_path(conn, :show, company))
-      {:error, changeset} ->
-        render(conn, "edit.html", company: company, changeset: changeset)
+    current_user_id = get_session(conn, :current_user).id
+    if(to_string(current_user_id) == id) do
+      company = Repo.get!(Company, id)
+      changeset = Company.changeset(company, company_params)
+      case Repo.update(changeset) do
+        {:ok, company} ->
+          conn
+          |> put_flash(:info, "Company updated successfully.")
+          |> redirect(to: company_path(conn, :show, company))
+        {:error, changeset} ->
+          render(conn, "edit.html", company: company, changeset: changeset)
+      end
+    else
+      conn
+      |> put_flash(:info, "Eroare in modificarea datelor.")
+      |> redirect(to: company_path(conn, :index))
     end
+
   end
 
   def delete(conn, %{"id" => id}) do

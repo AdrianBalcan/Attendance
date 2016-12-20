@@ -4,12 +4,11 @@ defmodule Attendance.EmployeeController do
   plug Attendance.Plug.Authenticate
   alias Attendance.Employee
   alias Attendance.Company
+  alias Attendance.Fingerprint
 
   def index(conn, _params) do
     current_user_id = get_session(conn, :current_user).id
-    companies = Repo.all(from f in Attendance.Company, [select: {f.id}, where: f.user_id == ^current_user_id])
-    IO.inspect companies
-    employees = Repo.all(from f in Employee, [where: f.companies_id == ^1])
+    employees = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, where: c.user_id == ^current_user_id)
     render(conn, "index.html", employees: employees)
   end
 
@@ -37,14 +36,12 @@ defmodule Attendance.EmployeeController do
 
   def show(conn, %{"id" => id}) do
     current_user_id = get_session(conn, :current_user).id
-#   employee = Repo.get!(Employee, id)
-    employee = join(Employee, :inner, [], companies)
-        |> Repo.all
-    if(employee.user_id != current_user_id) do
-      redirect(conn, to: employee_path(conn, :index))
-    else
+    [employee] = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, select: %{id: e.id, firstname: e.firstname, lastname: e.lastname, companies_id: e.companies_id, job: e.job, team: e.team, dob: e.dob, active: e.active, user_id: c.user_id, inserted_at: e.inserted_at, updated_at: e.updated_at}, where: e.id == ^id)
+    if(to_string(employee.user_id) == to_string(current_user_id)) do
       fingerprints = Repo.all(from f in Attendance.Fingerprint, where: f.employeeID == ^id)
-      render(conn, "show.html", employee: employee, fingerprints: fingerprints)
+      render(conn, "show.html", id: id, fingerprints: fingerprints, employee: employee)
+    else
+      redirect(conn, to: employee_path(conn, :index))
     end
   end
 

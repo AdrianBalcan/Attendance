@@ -67,7 +67,7 @@
   </tbody>
 </table>
 <ul>
-<li><%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee, firstname: @employee.firstname, lastname: @employee.lastname) %>
-<li><%= link "Edit", to: employee_path(@conn, :edit, @employee) %>
+<li><%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee.id, firstname: @employee.firstname, lastname: @employee.lastname) %>
+<li><%= link "Edit", to: employee_path(@conn, :edit, @id) %>
 <li><%= link "Back", to: employee_path(@conn, :index) %>
 </ul>
