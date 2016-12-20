@@ -69,7 +69,7 @@ defmodule Attendance.EmployeeController do
       case Repo.update(changeset) do
         {:ok, employee} ->
           conn
-          |> put_flash(:info, "Employee updated successfully.")
+          |> put_flash(:info, "Datele au fost modificate!")
           |> redirect(to: employee_path(conn, :show, employee))
         {:error, changeset} ->
           render(conn, "edit.html", employee: employee, changeset: changeset)
