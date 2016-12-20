@@ -103,9 +103,7 @@
 
     <!--main-container-part-->
     <div id="content">
-      <!--TODO: phoeonix alerts-->
-      <%= get_flash(@conn, :info) %>
-      <%= get_flash(@conn, :error) %>
+
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
@@ -135,6 +133,24 @@ function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
 }
 </script>
-     <script src="<%= static_path(@conn, "/js/app.js") %>"></script> 
+     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+     <!--: phoeonix alerts-->
+     <script>
+     function notify(text){
+             $.gritter.add({
+                     text:   text,
+                     sticky: false
+              })
+     }
+     </script>
+           <!--TODO: phoeonix alerts-->
+     <script>
+     var text = "<%= get_flash(@conn, :info) %><%= get_flash(@conn, :error) %>";
+         if(text.length > 0){
+           notify(text)
+         }
+     </script>
+     
   </body>
 </html>
