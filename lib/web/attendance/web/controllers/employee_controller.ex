@@ -21,9 +21,8 @@ defmodule Attendance.EmployeeController do
 
   def create(conn, %{"employee" => employee_params}) do
     current_user_id = get_session(conn, :current_user).id
-    employee_params = Map.put(employee_params, "user_id", to_string(current_user_id))
-    changeset = Employee.changeset(%Employee{}, employee_params)
-
+    changeset = Employee.changeset(%Employee{companies_id: current_user_id}, employee_params)
+    IO.inspect changeset
     case Repo.insert(changeset) do
       {:ok, employee} ->
         conn
@@ -62,7 +61,11 @@ defmodule Attendance.EmployeeController do
 
   def update(conn, %{"id" => id, "employee" => employee_params}) do
     current_user_id = get_session(conn, :current_user).id
-    if(to_string(current_user_id) == id) do
+    companies_id = employee_params["companies_id"]
+    [companies] = Repo.all(from c in Attendance.Company, select: c.user_id, where: c.id == ^companies_id)
+    IO.inspect companies
+    IO.inspect current_user_id
+    if(current_user_id == companies) do
       employee = Repo.get!(Employee, id)
       changeset = Employee.changeset(employee, employee_params)
 
