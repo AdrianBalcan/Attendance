@@ -1,0 +1,28 @@
+<h2>Show device group</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @device_group.name %>
+  </li>
+
+  <li>
+    <strong>Employee max fingerprints:</strong>
+    <%= @device_group.employee_max_fingerprints %>
+  </li>
+
+  <li>
+    <strong>Fingerprints limit:</strong>
+    <%= @device_group.fingerprints_limit %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @device_group.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: device_group_path(@conn, :edit, @device_group) %>
+<%= link "Back", to: device_group_path(@conn, :index) %>

@@ -23,11 +23,12 @@ defmodule Attendance.Router do
     get "/stats", PageController, :index
     get "/registration", RegistrationController, :new
     post "/registration", RegistrationController, :create
-    resources "/employees", EmployeeController
     resources "/fingerprints", FingerprintController
     resources "/attendances", AttendanceController
-    resources "/devices", DeviceController
     resources "/companies", CompanyController
+    resources "/employees", EmployeeController
+    resources "/devicegroups", DeviceGroupController
+    resources "/devices", DeviceController
   end
 
   # Other scopes may use custom stacks.

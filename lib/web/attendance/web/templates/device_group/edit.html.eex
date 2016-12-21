@@ -1,0 +1,6 @@
+<h2>Edit device group</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: device_group_path(@conn, :update, @device_group) %>
+
+<%= link "Back", to: device_group_path(@conn, :index) %>
