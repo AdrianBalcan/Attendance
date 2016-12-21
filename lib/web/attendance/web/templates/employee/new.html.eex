@@ -1,11 +1,17 @@
   <div id="content-header">
     <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/employees">Angajati</a> <a href="#" class="current">Adaugare angajat</a></div>
 
-<h2>Adaugare angajat</h2>
-
+    <div class="widget-box">
+      <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+        <h5>Adaugare angajat</h5>
+      </div>
+      <div class="widget-content nopadding">
+    
 <%= render "form.html", changeset: @changeset,
                         companies: @companies,
                         action: employee_path(@conn, :create) %>
 
 <%= link "Back", to: employee_path(@conn, :index) %>
 
+    </div>
+  </div>

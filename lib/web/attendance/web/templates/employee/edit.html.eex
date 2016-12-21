@@ -1,7 +1,14 @@
-<h2>Modificare date angajat</h2>
+<div class="widget-box">
+  <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+    <h5>Editeaza informatii</h5>
+  </div>
+  <div class="widget-content nopadding">
 
 <%= render "form.html", changeset: @changeset,
                         companies: @companies,
                         action: employee_path(@conn, :update, @employee) %>
 
 <%= link "Back", to: employee_path(@conn, :index) %>
+
+</div>
+</div>

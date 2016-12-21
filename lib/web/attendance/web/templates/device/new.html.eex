@@ -3,7 +3,7 @@
   <a href="/devices">Dispozitive</a>
 <a href="#" class="current">Adaugare dispozitiv</a>
 </div>
-<h2>Adaugare dispozitiv nou</h2>
+<h2>Adaugare dispozitiv</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: device_path(@conn, :create) %>
