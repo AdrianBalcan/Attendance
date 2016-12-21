@@ -17,8 +17,7 @@ defmodule Attendance.CompanyController do
 
   def create(conn, %{"company" => company_params}) do
     current_user_id = get_session(conn, :current_user).id
-    company_params = Map.put(company_params, "user_id", to_string(current_user_id))
-    changeset = Company.changeset(%Company{}, company_params)
+    changeset = Company.changeset(%Company{user_id: current_user_id}, company_params)
     case Repo.insert(changeset) do
       {:ok, _company} ->
         conn
