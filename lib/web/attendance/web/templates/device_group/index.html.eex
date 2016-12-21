@@ -1,0 +1,32 @@
+<h2>Listing devicegroups</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Employee max fingerprints</th>
+      <th>Fingerprints limit</th>
+      <th>User</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for device_group <- @devicegroups do %>
+    <tr>
+      <td><%= device_group.name %></td>
+      <td><%= device_group.employee_max_fingerprints %></td>
+      <td><%= device_group.fingerprints_limit %></td>
+      <td><%= device_group.user_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: device_group_path(@conn, :show, device_group), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: device_group_path(@conn, :edit, device_group), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: device_group_path(@conn, :delete, device_group), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New device group", to: device_group_path(@conn, :new) %>
