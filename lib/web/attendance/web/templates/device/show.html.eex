@@ -8,13 +8,8 @@
   </li>
 
   <li>
-    <strong>Userid:</strong>
-    <%= @device.userID %>
-  </li>
-
-  <li>
-    <strong>Expire:</strong>
-    <%= @device.expire %>
+    <strong>Devicegroup:</strong>
+    <%= @device.devicegroup_id %>
   </li>
 
 </ul>
