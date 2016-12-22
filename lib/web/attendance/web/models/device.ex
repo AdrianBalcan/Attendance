@@ -13,7 +13,8 @@ defmodule Attendance.Device do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:hw])
+    |> cast(params, [:hw, :devicegroup_id])
+    |> unique_constraint(:hw, on: Attendance.Repo, downcase: true)
     |> validate_required([:hw])
   end
 end

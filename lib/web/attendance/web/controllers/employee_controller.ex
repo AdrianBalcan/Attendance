@@ -21,15 +21,15 @@ defmodule Attendance.EmployeeController do
 
   def create(conn, %{"employee" => employee_params}) do
     current_user_id = get_session(conn, :current_user).id
-    changeset = Employee.changeset(%Employee{companies_id: current_user_id}, employee_params)
-    IO.inspect changeset
+    changeset = Employee.changeset(%Employee{}, employee_params)
     case Repo.insert(changeset) do
       {:ok, employee} ->
         conn
         |> put_flash(:info, "Angajatul a fost adaugat!")
         |> redirect(to: employee_path(conn, :show, employee))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
+        render(conn, "new.html", changeset: changeset, companies: companies)
     end
   end
 

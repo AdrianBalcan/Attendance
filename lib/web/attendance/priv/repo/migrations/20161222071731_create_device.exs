@@ -8,7 +8,8 @@ defmodule Attendance.Repo.Migrations.CreateDevice do
 
       timestamps()
     end
-    create index(:devices, [:devicegroup_id])
+
+    create unique_index(:devices, [:hw])
 
   end
 end

@@ -10,7 +10,6 @@ defmodule Attendance.Repo.Migrations.CreateDeviceGroup do
 
       timestamps()
     end
-    create index(:devicegroups, [:user_id])
 
   end
 end

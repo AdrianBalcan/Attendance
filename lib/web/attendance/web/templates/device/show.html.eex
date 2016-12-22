@@ -14,5 +14,5 @@
 
 </ul>
 
-<%= link "Edit", to: device_path(@conn, :edit, @device) %>
+<%= link "Edit", to: device_path(@conn, :edit, @device.id) %>
 <%= link "Back", to: device_path(@conn, :index) %>
