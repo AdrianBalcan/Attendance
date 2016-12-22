@@ -4,7 +4,6 @@ defmodule Attendance.EmployeeController do
   plug Attendance.Plug.Authenticate
   alias Attendance.Employee
   alias Attendance.Company
-  alias Attendance.Fingerprint
 
   def index(conn, _params) do
     current_user_id = get_session(conn, :current_user).id
@@ -63,8 +62,6 @@ defmodule Attendance.EmployeeController do
     current_user_id = get_session(conn, :current_user).id
     companies_id = employee_params["companies_id"]
     [companies] = Repo.all(from c in Attendance.Company, select: c.user_id, where: c.id == ^companies_id)
-    IO.inspect companies
-    IO.inspect current_user_id
     if(current_user_id == companies) do
       employee = Repo.get!(Employee, id)
       changeset = Employee.changeset(employee, employee_params)

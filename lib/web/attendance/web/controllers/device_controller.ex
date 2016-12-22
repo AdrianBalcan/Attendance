@@ -60,28 +60,37 @@ defmodule Attendance.DeviceController do
   end
 
   def update(conn, %{"id" => id, "device" => device_params}) do
-    device = Repo.get!(Device, id)
-    changeset = Device.changeset(device, device_params)
+    current_user_id = get_session(conn, :current_user).id
+    devicegroup_id = device_params["devicegroup_id"]
+    [device] = Repo.all(from dg in Attendance.DeviceGroup, select: dg.user_id, where: dg.id == ^devicegroup_id)
+    if(current_user_id == device) do
+      device = Repo.get!(Device, id)
+      changeset = Device.changeset(device, device_params)
 
-    case Repo.update(changeset) do
-      {:ok, device} ->
-        conn
-        |> put_flash(:info, "Device updated successfully.")
-        |> redirect(to: device_path(conn, :show, device))
-      {:error, changeset} ->
-        render(conn, "edit.html", device: device, changeset: changeset)
+      case Repo.update(changeset) do
+        {:ok, device} ->
+          conn
+          |> put_flash(:info, "Detaliile dispozitivului au fost modificate.")
+          |> redirect(to: device_path(conn, :show, device))
+        {:error, changeset} ->
+          render(conn, "edit.html", device: device, changeset: changeset)
+      end
+    else
+      conn
+      |> put_flash(:error, "Eroare la modificarea datelor! Incearca din nou!")
+      |> redirect(to: device_path(conn, :index))
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    device = Repo.get!(Device, id)
-
-    # Here we use delete! (with a bang) because we expect
-    # it to always work (and if it does not, it will raise).
-    Repo.delete!(device)
-
-    conn
-    |> put_flash(:info, "Device deleted successfully.")
-    |> redirect(to: device_path(conn, :index))
-  end
+#  def delete(conn, %{"id" => id}) do
+#    device = Repo.get!(Device, id)
+#
+#    # Here we use delete! (with a bang) because we expect
+#    # it to always work (and if it does not, it will raise).
+#    Repo.delete!(device)
+#
+#    conn
+#    |> put_flash(:info, "Device deleted successfully.")
+#    |> redirect(to: device_path(conn, :index))
+#  end
 end
