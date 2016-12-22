@@ -4,7 +4,6 @@ defmodule Attendance.EmployeeController do
   plug Attendance.Plug.Authenticate
   alias Attendance.Employee
   alias Attendance.Company
-  alias Attendance.Fingerprint
 
   def index(conn, _params) do
     current_user_id = get_session(conn, :current_user).id
@@ -21,15 +20,15 @@ defmodule Attendance.EmployeeController do
 
   def create(conn, %{"employee" => employee_params}) do
     current_user_id = get_session(conn, :current_user).id
-    changeset = Employee.changeset(%Employee{companies_id: current_user_id}, employee_params)
-    IO.inspect changeset
+    changeset = Employee.changeset(%Employee{}, employee_params)
     case Repo.insert(changeset) do
       {:ok, employee} ->
         conn
         |> put_flash(:info, "Angajatul a fost adaugat!")
         |> redirect(to: employee_path(conn, :show, employee))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
+        render(conn, "new.html", changeset: changeset, companies: companies)
     end
   end
 
@@ -63,8 +62,6 @@ defmodule Attendance.EmployeeController do
     current_user_id = get_session(conn, :current_user).id
     companies_id = employee_params["companies_id"]
     [companies] = Repo.all(from c in Attendance.Company, select: c.user_id, where: c.id == ^companies_id)
-    IO.inspect companies
-    IO.inspect current_user_id
     if(current_user_id == companies) do
       employee = Repo.get!(Employee, id)
       changeset = Employee.changeset(employee, employee_params)

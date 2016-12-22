@@ -12,18 +12,6 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :employee_max_fingerprints, class: "control-label" %>
-    <%= number_input f, :employee_max_fingerprints, class: "form-control" %>
-    <%= error_tag f, :employee_max_fingerprints %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :fingerprints_limit, class: "control-label" %>
-    <%= number_input f, :fingerprints_limit, class: "form-control" %>
-    <%= error_tag f, :fingerprints_limit %>
-  </div>
-
-  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -8,15 +8,14 @@ defmodule Attendance.Employee do
     field :team, :string
     field :dob, Ecto.Date
     field :active, :boolean, default: false
-    field :user_id, :integer
 
     belongs_to :companies, Attendance.Company
 
     timestamps()
   end
   
-  @required_fields ~w(firstname lastname job team dob)
-  @optional_fields ~w(user_id active)
+  @required_fields ~w(firstname lastname companies_id job team dob)
+  @optional_fields ~w(active)
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
