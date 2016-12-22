@@ -10,12 +10,14 @@ defmodule Attendance.DeviceGroup do
     timestamps()
   end
 
+  @required_fields ~w()
+  @optional_fields ~w(name user_id employee_max_fingerprints fingerprints_limit)
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :employee_max_fingerprints, :fingerprints_limit])
-    |> validate_required([:name, :employee_max_fingerprints, :fingerprints_limit])
+    |> cast(params, @required_fields, @optional_fields)
   end
 end

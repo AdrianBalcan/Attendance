@@ -1,11 +1,7 @@
-<div id="breadcrumb">
-  <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-  <a href="/devices">Dispozitive</a>
-<a href="#" class="current">Adaugare dispozitiv</a>
-</div>
-<h2>Adaugare dispozitiv</h2>
+<h2>New device</h2>
 
 <%= render "form.html", changeset: @changeset,
+                        devicegroups: @devicegroups,
                         action: device_path(@conn, :create) %>
 
 <%= link "Back", to: device_path(@conn, :index) %>

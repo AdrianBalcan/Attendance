@@ -10,6 +10,7 @@ defmodule Attendance.User do
     field :password_confirmation, :string, virtual: true
 
     has_many :companies, Attendance.Company
+    has_many :devicegroups, Attendance.DeviceGroup
 
     timestamps()
   end

@@ -14,15 +14,18 @@ defmodule Attendance.RegistrationController do
 #  plug :action
 
   def new(conn, _params) do
-    changeset = User.changeset(%User{companies: [
-                                        %Attendance.Company{name: ""},
-                                      ]
-                           })
+    changeset = User.changeset(
+      %User{
+        companies: [%Attendance.Company{name: ""}]
+      }
+    )
     render conn, changeset: changeset
   end
 
   def create(conn, %{"user" => user_params}) do
-    changeset = User.changeset(%User{}, user_params)
+    changeset = User.changeset(%User{
+        devicegroups: [%Attendance.DeviceGroup{}]
+    }, user_params)
     IO.inspect changeset
     if changeset.valid? do
       changeset = (Password.generate_password(changeset))

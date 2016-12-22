@@ -18,7 +18,7 @@ defmodule Attendance.DeviceGroupController do
 
   def create(conn, %{"device_group" => device_group_params}) do
     current_user_id = get_session(conn, :current_user).id
-    changeset = DeviceGroup.changeset(%DeviceGroup{user_id: current_user_id}, device_group_params)
+    changeset = DeviceGroup.changeset(%DeviceGroup{employee_max_fingerprints: 1000, fingerprints_limit: 2, user_id: current_user_id}, device_group_params)
 
     case Repo.insert(changeset) do
       {:ok, _device_group} ->

@@ -6,21 +6,15 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :hw, class: "control-label" %>
+    <%= label f, :Cod_dispozitiv, class: "control-label" %>
     <%= text_input f, :hw, class: "form-control" %>
     <%= error_tag f, :hw %>
   </div>
 
   <div class="form-group">
-    <%= label f, :userID, class: "control-label" %>
-    <%= number_input f, :userID, class: "form-control" %>
-    <%= error_tag f, :userID %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :expire, class: "control-label" %>
-    <%= date_select f, :expire, class: "form-control" %>
-    <%= error_tag f, :expire %>
+    <%= label f, "Grup", class: "control-label" %>
+    <%= select f, :devicegroup_id, @devicegroups, class: "form-control" %>
+    <%= error_tag f, :devicegroups_id %>
   </div>
 
   <div class="form-group">

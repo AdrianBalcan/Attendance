@@ -3,8 +3,7 @@ defmodule Attendance.Device do
 
   schema "devices" do
     field :hw, :string
-    field :userID, :integer
-    field :expire, Ecto.Date
+    belongs_to :devicegroup, Attendance.Devicegroup
 
     timestamps()
   end
@@ -14,7 +13,8 @@ defmodule Attendance.Device do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:hw, :userID, :expire])
-    |> validate_required([:hw, :userID, :expire])
+    |> cast(params, [:hw, :devicegroup_id])
+    |> unique_constraint(:hw, on: Attendance.Repo, downcase: true)
+    |> validate_required([:hw])
   end
 end

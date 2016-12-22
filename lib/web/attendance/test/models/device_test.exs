@@ -3,7 +3,7 @@ defmodule Attendance.DeviceTest do
 
   alias Attendance.Device
 
-  @valid_attrs %{userID: 42, expire: %{day: 17, month: 4, year: 2010}, hw: "some content"}
+  @valid_attrs %{hw: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
