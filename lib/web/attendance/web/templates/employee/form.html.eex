@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="control-group">
     <%= label f, :Echipa, class: "control-label" %>
     <div class="controls">
       <%= text_input f, :team, class: "span8" %>
@@ -48,12 +48,12 @@
   </div>
 
 
-  <div class="form-group">
-  <div class="row">
+  <div class="control-group">
     <%= label f, "Data nasterii", class: "control-label" %>
-      <%= date_select f, :dob, builder: fn b -> %>
-        <div class="col-xs-1"><%= b.(:day, []) %></div> / <%= b.(:month, []) %> / <%= b.(:year, [options: 1940..2015]) %>
-      <% end %>
+    <div class="controls">
+    <%= date_select f, :dob, builder: fn b -> %>
+      <%= b.(:day, [class: "span2"]) %><%= b.(:month, [class: "span3"]) %><%= b.(:year, [options: 1940..2015, class: "span3"]) %>
+    <% end %>
     </div>
   </div>
 
