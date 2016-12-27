@@ -21,6 +21,11 @@
   </li>
 
   <li>
+    <strong>Grup Dispozitive:</strong>
+    <%= @employee.devicegroups_id %>
+  </li>
+
+  <li>
     <strong>Job:</strong>
     <%= @employee.job %>
   </li>

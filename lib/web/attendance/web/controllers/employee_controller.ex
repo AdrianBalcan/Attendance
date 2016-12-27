@@ -14,8 +14,9 @@ defmodule Attendance.EmployeeController do
   def new(conn, _params) do
     current_user_id = get_session(conn, :current_user).id
     companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
+    devicegroups = Repo.all(from dg in Attendance.DeviceGroup, [select: {dg.id, dg.id}, where: dg.user_id == ^current_user_id])
     changeset = Employee.changeset(%Employee{})
-    render(conn, "new.html", changeset: changeset, companies: companies)
+    render(conn, "new.html", changeset: changeset, companies: companies, devicegroups: devicegroups)
   end
 
   def create(conn, %{"employee" => employee_params}) do
@@ -34,7 +35,7 @@ defmodule Attendance.EmployeeController do
 
   def show(conn, %{"id" => id}) do
     current_user_id = get_session(conn, :current_user).id
-    [employee] = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, select: %{id: e.id, firstname: e.firstname, lastname: e.lastname, companies_id: e.companies_id, job: e.job, team: e.team, dob: e.dob, active: e.active, user_id: c.user_id, inserted_at: e.inserted_at, updated_at: e.updated_at}, where: e.id == ^id)
+    [employee] = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, select: %{id: e.id, firstname: e.firstname, lastname: e.lastname, companies_id: e.companies_id, devicegroups_id: e.devicegroups_id, job: e.job, team: e.team, dob: e.dob, active: e.active, user_id: c.user_id, inserted_at: e.inserted_at, updated_at: e.updated_at}, where: e.id == ^id)
     if(to_string(employee.user_id) == to_string(current_user_id)) do
       fingerprints = Repo.all(from f in Attendance.Fingerprint, where: f.employeeID == ^id)
       render(conn, "show.html", id: id, fingerprints: fingerprints, employee: employee)
@@ -51,10 +52,11 @@ defmodule Attendance.EmployeeController do
       |> put_flash(:error, "Eroare la modificarea datelor! Incearca din nou!")
       |> redirect(to: employee_path(conn, :index))
     else
-      companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
+      companies = Repo.all(from c in Attendance.Company, [select: {c.name, c.id}, where: c.user_id == ^current_user_id])
+      devicegroups = Repo.all(from dg in Attendance.DeviceGroup, [select: {dg.id, dg.id}, where: dg.user_id == ^current_user_id])
       employee = Repo.get!(Employee, id)
       changeset = Employee.changeset(employee)
-      render(conn, "edit.html", employee: employee, changeset: changeset, companies: companies)
+      render(conn, "edit.html", employee: employee, changeset: changeset, companies: companies, devicegroups: devicegroups)
     end
   end
 

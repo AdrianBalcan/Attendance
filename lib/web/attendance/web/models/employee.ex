@@ -10,11 +10,12 @@ defmodule Attendance.Employee do
     field :active, :boolean, default: false
 
     belongs_to :companies, Attendance.Company
+    belongs_to :devicegroups, Attendance.DeviceGroup
 
     timestamps()
   end
   
-  @required_fields ~w(firstname lastname companies_id job team dob)
+  @required_fields ~w(firstname lastname companies_id devicegroups_id job team dob)
   @optional_fields ~w(active)
 
   @doc """
