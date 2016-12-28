@@ -20,14 +20,14 @@ defmodule Attendance.Employee do
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
+  """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:firstname, :lastname, :companies_id, :job, :team, :dob, :active])
-    |> validate_required([:firstname, :lastname, :job, :team, :dob, :active])
+    |> cast(params, [:firstname, :lastname, :companies_id, :devicegroups_id, :job, :team, :dob])
+    |> validate_required([:firstname, :lastname, :companies_id, :devicegroups_id, :job, :team, :dob])
   end
-  """
-  def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
-  end
+#  def changeset(model, params \\ %{}) do
+#    model
+#    |> cast(params, @required_fields, @optional_fields)
+#  end
 end

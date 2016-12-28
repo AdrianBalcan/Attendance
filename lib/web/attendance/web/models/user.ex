@@ -23,7 +23,9 @@ defmodule Attendance.User do
   """
   def changeset(model, params \\ %{}) do
     cast(model, params, ~w(firstname lastname email password password_confirmation))
+    #cast(model, params, [:firstname, :lastname, :email, :password, :password_confirmation])
     |> cast_assoc(:companies)
+    |> cast_assoc(:devicegroups)
     |> validate_required([:firstname, :lastname, :email])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email, on: Attendance.Repo, downcase: true)

@@ -28,8 +28,9 @@ defmodule Attendance.EmployeeController do
         |> put_flash(:info, "Angajatul a fost adaugat!")
         |> redirect(to: employee_path(conn, :show, employee))
       {:error, changeset} ->
+        devicegroups = Repo.all(from dg in Attendance.DeviceGroup, [select: {dg.id, dg.id}, where: dg.user_id == ^current_user_id])
         companies = Repo.all(from f in Attendance.Company, [select: {f.name, f.id}, where: f.user_id == ^current_user_id])
-        render(conn, "new.html", changeset: changeset, companies: companies)
+        render(conn, "new.html", changeset: changeset, companies: companies, devicegroups: devicegroups)
     end
   end
 
