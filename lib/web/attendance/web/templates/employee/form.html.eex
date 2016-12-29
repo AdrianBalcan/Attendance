@@ -1,53 +1,70 @@
-<%= form_for @changeset, @action, fn f -> %>
+
+
+<%= form_for @changeset, @action, [class: "form-horizontal"], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, eroare! Va rog verificati erorile de mai jos!</p>
     </div>
   <% end %>
 
-  <div class="form-group">
+  <div class="control-group">
     <%= label f, :Prenume, class: "control-label" %>
-    <%= text_input f, :firstname, class: "form-control" %>
-    <%= error_tag f, :firstname %>
+    <div class="controls">
+      <%= text_input f, :firstname, class: "span8", placeholder: "Prenume" %>
+      <%= error_tag f, :firstname %>
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="control-group">
     <%= label f, :Nume, class: "control-label" %>
-    <%= text_input f, :lastname, class: "form-control" %>
-    <%= error_tag f, :lastname %>
+    <div class="controls">
+      <%= text_input f, :lastname, class: "span8", placeholder: "Nume" %>
+      <%= error_tag f, :lastname %>
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="control-group">
     <%= label f, "Companie/Proiect", class: "control-label" %>
-    <%= select f, :companies_id, @companies, class: "form-control" %>
-    <%= error_tag f, :companies_id %>
+    <div class="controls">
+      <%= select f, :companies_id, @companies, class: "span8" %>
+      <%= error_tag f, :companies_id %>
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="control-group">
+    <%= label f, "Grup dispozitive", class: "control-label" %>
+    <div class="controls">
+      <%= select f, :devicegroups_id, @devicegroups, class: "span8" %>
+      <%= error_tag f, :devicegroups_id %>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= label f, :Pozitie, class: "control-label" %>
-    <%= text_input f, :job, class: "form-control" %>
-    <%= error_tag f, :job %>
+    <div class="controls">
+      <%= text_input f, :job, class: "span8" %>
+      <%= error_tag f, :job %>
+    </div>
   </div>
 
-  <div class="form-group">
+  <div class="control-group">
     <%= label f, :Echipa, class: "control-label" %>
-    <%= text_input f, :team, class: "form-control" %>
-    <%= error_tag f, :team %>
+    <div class="controls">
+      <%= text_input f, :team, class: "span8" %>
+      <%= error_tag f, :team %>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= label f, "Data nasterii:", class: "control-label" %>
-    <%= date_select f, :dob, year: [options: 1940..2100], class: "form-control" %>
-    <%= error_tag f, :dob %>
+  <div class="control-group">
+    <%= label f, "Data nasterii", class: "control-label" %>
+    <div class="controls">
+    <%= date_select f, :dob, builder: fn b -> %>
+      <%= b.(:day, [class: "span2"]) %><%= b.(:month, [class: "span3"]) %><%= b.(:year, [options: 1940..2015, class: "span3"]) %>
+    <% end %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= submit "Salveaza", class: "btn btn-success" %>
   </div>
 
-  <div class="form-group">
-    <%= label f, "Activ", class: "control-label" %>
-    <%= checkbox f, :active, class: "form-control" %>
-    <%= error_tag f, :active %>
-  </div>
-
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
 <% end %>

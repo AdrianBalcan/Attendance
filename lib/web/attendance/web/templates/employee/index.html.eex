@@ -1,37 +1,57 @@
   <div id="content-header">
     <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Angajati</a> </div>
-    <h1>Angajati</h1>
   </div>
 
-    <div class="pull-right">
-    <%= link "Adauga angajat", to: employee_path(@conn, :new), class: "btn btn-primary btn-xs" %>
-    </div>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Nume</th>
-      <th>Prenume</th>
-      <th>Pozitie</th>
-      <th>Echipa</th>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+
+
+    <div class="container-fluid">
+    <div class="row-fluid">
+
+
+
+        <div class="span12">
+        <div class="pull-left">
+        <%= link "Adauga angajat", to: employee_path(@conn, :new), class: "btn btn-primary btn-xs" %>
+        </div>
+        <br>
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+              <h5>Angajati</h5>
+
+
+            </div>
+            <div class="widget-content nopadding">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Nume</th>
+                    <th>Prenume</th>
+                    <th>Pozitie</th>
+                    <th>Echipa</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+
 <%= for employee <- @employees do %>
-    <tr>
-      <td><%= employee.firstname %></td>
-      <td><%= employee.lastname %></td>
-      <td><%= employee.job %></td>
-      <td><%= employee.team %></td>
 
-      <td class="text-right">
-        <%= link "Show", to: employee_path(@conn, :show, employee), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: employee_path(@conn, :edit, employee), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: employee_path(@conn, :delete, employee), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+            <tr class="odd gradeX">
 
+                  <td><%= employee.firstname %></td>
+                  <td><%= employee.lastname %></td>
+                  <td><%= employee.job %></td>
+                  <td><%= employee.team %></td>
+                  <td width="30"><%= link "Detalii", to: employee_path(@conn, :show, employee), class: "btn btn-default btn-mini" %></td>
+
+            </tr>
+                  <% end %>
+
+
+
+
+                </tbody>
+              </table>
+            </div>
+          </div>
