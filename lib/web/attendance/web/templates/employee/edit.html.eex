@@ -13,6 +13,7 @@
 
 <%= render "form.html", changeset: @changeset,
                         companies: @companies,
+                        devicegroups: @devicegroups,
                         action: employee_path(@conn, :update, @employee) %>
 
       </div>

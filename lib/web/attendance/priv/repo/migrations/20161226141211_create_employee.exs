@@ -6,6 +6,7 @@ defmodule Attendance.Repo.Migrations.CreateEmployee do
       add :firstname, :string
       add :lastname, :string
       add :companies_id, references(:companies) 
+      add :devicegroups_id, references(:devicegroups) 
       add :phone, :string
       add :job, :string
       add :team, :string

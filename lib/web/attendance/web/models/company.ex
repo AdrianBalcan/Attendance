@@ -19,8 +19,8 @@ defmodule Attendance.Company do
   @optional_fields ~w(user_id cui nrc adresa localitate judet telefon)
 
   def changeset(model, params \\ %{}) do
-    model
-    |> cast(params, @required_fields, @optional_fields)
+    cast(model, params, [:name])
+      |> validate_required([:name])
   end
 
 #  @doc """
