@@ -1,51 +1,89 @@
 <div id="content-header">
     <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/employees">Angajati</a> <a href="#" class="current">Detalii angajat</a></div>
 
-<h2>Detalii angajat</h2>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span7">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-user"></i> </span>
+          <h5>Detalii Angajat</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered table-striped">
+            <thead>
+            </thead>
+            <tbody>
+
+              <tr class="odd gradeX">
+                <td>Prenume:</td>
+                <td><%= @employee.firstname %></td>
+
+              </tr>
+              <tr class="even gradeC">
+                <td>Nume:</td>
+                <td><%= @employee.lastname %></td>
+
+              </tr>
+              <tr class="odd gradeA">
+                <td>Companie:</td>
+                <td><%= @employee.companies_id %></td>
+
+              </tr>
+              <tr class="even gradeA">
+                <td>Pozitie:</td>
+                <td><%= @employee.job %></td>
+
+              </tr>
+              <tr class="even gradeA">
+                <td>Echipa:</td>
+                <td><%= @employee.team %></td>
+
+              </tr>
+              <tr class="even gradeA">
+                <td>Data nasterii:</td>
+                <td><%= @employee.dob %></td>
+
+              </tr>
+              <tr class="even gradeA">
+                <td>Activ:</td>
+                <td><%= @employee.active %></td>
+
+
+
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+
+      <tr class="form-actions">
+
+            <%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee.id, firstname: @employee.firstname, lastname: @employee.lastname), class: "btn btn-success" %>
+            <%= link "Editeaza Angajat", to: employee_path(@conn, :edit, @id), class: "btn btn-primary" %>
+            <%= link "Inapoi", to: employee_path(@conn, :index), class: "btn btn-Button" %>
+
+      </tr>
 
 <ul>
 
-  <li>
-    <strong>Firstname:</strong>
-    <%= @employee.firstname %>
-  </li>
 
-  <li>
-    <strong>Lastname:</strong>
-    <%= @employee.lastname %>
-  </li>
 
-  <li>
-    <strong>Companie/Proiect:</strong>
-    <%= @employee.companies_id %>
-  </li>
 
-  <li>
-    <strong>Job:</strong>
-    <%= @employee.job %>
-  </li>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
-  <li>
-    <strong>Team:</strong>
-    <%= @employee.team %>
-  </li>
 
-  <li>
-    <strong>Dob:</strong>
-    <%= @employee.dob %>
-  </li>
-
-  <li>
-    <strong>Active:</strong>
-    <%= @employee.active %>
-  </li>
 
 </ul>
 
 <table class="table">
   <thead>
     <tr>
-      <th>#</th>
+      <th>Amprente</th>
       <th>Active</th>
 
       <th></th>
@@ -58,16 +96,10 @@
       <td><%= fingerprint.active %></td>
 
       <td class="text-right">
-        <%= link "Show", to: fingerprint_path(@conn, :show, fingerprint), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: fingerprint_path(@conn, :edit, fingerprint), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: fingerprint_path(@conn, :delete, fingerprint), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+
+        <%= link "Sterge", to: fingerprint_path(@conn, :delete, fingerprint), method: :delete, data: [confirm: "Stergeti?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-<ul>
-<li><%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee.id, firstname: @employee.firstname, lastname: @employee.lastname) %>
-<li><%= link "Edit", to: employee_path(@conn, :edit, @id) %>
-<li><%= link "Back", to: employee_path(@conn, :index) %>
-</ul>
