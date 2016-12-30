@@ -25,16 +25,22 @@ defmodule Attendance.FingerprintController do
   end
 
   def create(conn, %{"fingerprint" => fingerprint_params}) do
-    changeset = Fingerprint.changeset(%Fingerprint{}, fingerprint_params)
+     IO.inspect fingerprint_params 
+ #   changeset = Fingerprint.changeset(%Fingerprint{}, fingerprint_params)
 
-    case Repo.insert(changeset) do
-      {:ok, _fingerprint} ->
-        conn
-        |> put_flash(:info, "Fingerprint created successfully.")
-        |> redirect(to: fingerprint_path(conn, :index))
-      {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
-    end
+ #   case Repo.insert(changeset) do
+ #     {:ok, _fingerprint} ->
+ #       conn
+ #       |> put_flash(:info, "Fingerprint created successfully.")
+ #       |> redirect(to: employee_path(conn, :index))
+      Attendance.Endpoint.broadcast "sp:" <> fingerprint_params["device"], "new:msg", %{"response" => %{"type" => "enroll", "employeeID" => fingerprint_params["employeeID"], "firstname" => fingerprint_params["firstname"], "lastname" => fingerprint_params["lastname"]}}
+
+      conn
+      |> put_flash(:info, "Statia este pregatita pentru inregistrarea angajatului.")
+      |> redirect(to: employee_path(conn, :show, fingerprint_params["employeeID"]))
+ #     {:error, changeset} ->
+ #       render(conn, "new.html", changeset: changeset)
+ #   end
   end
 
   def show(conn, %{"id" => id}) do
