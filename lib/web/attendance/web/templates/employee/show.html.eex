@@ -14,37 +14,37 @@
             </thead>
             <tbody>
 
-              <tr class="odd gradeX">
+              <tr>
                 <td>Prenume:</td>
                 <td><%= @employee.firstname %></td>
 
               </tr>
-              <tr class="even gradeC">
+              <tr>
                 <td>Nume:</td>
                 <td><%= @employee.lastname %></td>
 
               </tr>
-              <tr class="odd gradeA">
+              <tr>
                 <td>Companie:</td>
                 <td><%= @employee.companies_id %></td>
 
               </tr>
-              <tr class="even gradeA">
+              <tr>
                 <td>Pozitie:</td>
                 <td><%= @employee.job %></td>
 
               </tr>
-              <tr class="even gradeA">
+              <tr>
                 <td>Echipa:</td>
                 <td><%= @employee.team %></td>
 
               </tr>
-              <tr class="even gradeA">
+              <tr>
                 <td>Data nasterii:</td>
                 <td><%= @employee.dob %></td>
 
               </tr>
-              <tr class="even gradeA">
+              <tr>
                 <td>Activ:</td>
                 <td><%= @employee.active %></td>
 
