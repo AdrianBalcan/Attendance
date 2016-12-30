@@ -13,14 +13,6 @@
     </div>
   </div>
 
-  <div class="control-group">
-    <%= label f, :Locatie, class: "control-label" %>
-    <div class="controls">
-    <%= text_input f, :hw, class: "form-control" %>
-    <%= error_tag f, :hw %>
-    </div>
-  </div>
-
 <div class="control-group">
     <%= label f, "Grup", class: "control-label" %>
     <div class="controls">

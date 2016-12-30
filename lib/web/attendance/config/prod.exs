@@ -13,7 +13,8 @@ use Mix.Config
 # which you typically run after static files are built.
 config :attendance, Attendance.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
+  url: [host: "pontaj.zog.ro", port: 80],
+  check_origin: false,
   cache_static_manifest: "priv/static/manifest.json"
 
 # Do not print debug messages in production
