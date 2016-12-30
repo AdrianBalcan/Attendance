@@ -1,6 +1,20 @@
-<h2>Modificarea datelor companiei</h2>
+<div id="content-header">
+  <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/companies">Companii</a> <a href="#" class="current">Editeaza Companie</a></div>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span7">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+
+<h5>Editeaza Companie</h5>
+</div>
+<div class="widget-content nopadding">
 
 <%= render "form.html", changeset: @changeset,
                         action: company_path(@conn, :update, @company) %>
 
-<%= link "Back", to: company_path(@conn, :index) %>
+                        </div>
+                      </div>
+                    </div>
+                    </div>

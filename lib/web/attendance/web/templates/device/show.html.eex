@@ -1,18 +1,39 @@
-<h2>Show device</h2>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/devices">Dispozitive</a></div>
 
-<ul>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span7">
+          <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-sitemap"></i> </span>
+              <h5>Dispozitive</h5>
+              </div>
+              <div class="widget-content nopadding">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                  </thead>
+                  <tbody>
 
-  <li>
-    <strong>Hw:</strong>
-    <%= @device.hw %>
-  </li>
+                  <tr>
+                    <td>Serie dispozitiv: <%= @device.hw %></td>
 
-  <li>
-    <strong>Devicegroup:</strong>
-    <%= @device.devicegroup_id %>
-  </li>
+                  </tr>
 
-</ul>
+                  <tr>
+                    <td>Grup: <%= @device.devicegroup_id %></td>
 
-<%= link "Edit", to: device_path(@conn, :edit, @device.id) %>
-<%= link "Back", to: device_path(@conn, :index) %>
+                  </tr>
+
+
+
+                  </div>
+                  </div>
+                  </table>
+
+                  </div>
+                  </div>
+
+
+                  <%= link "Editeaza", to: device_path(@conn, :edit, @device.id), class: "btn btn-primary" %>
+
+            </div>

@@ -1,4 +1,6 @@
-<h2>Listing devices</h2>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/devices">Dispozitive</a></div>
+
 
 <table class="table">
   <thead>
