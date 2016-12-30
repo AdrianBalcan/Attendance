@@ -1,6 +1,8 @@
 <div id="content-header">
   <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/companies">Companii</a></div>
 
+  
+
 <table class="table">
   <thead>
     <tr>
@@ -23,4 +25,4 @@
   </tbody>
 </table>
 
-<%= link "Adauga companie", to: company_path(@conn, :new), class: "btn btn-success" %>
+<%= link "New company", to: company_path(@conn, :new), class: "btn btn-success" %>
