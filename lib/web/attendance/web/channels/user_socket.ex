@@ -2,7 +2,7 @@ defmodule Attendance.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "sp:*", Attendance.RoomChannel
+  channel "sp:*", Attendance.DeviceChannel
   channel "rooms:*", Attendance.RoomChannel
 
   ## Transports
