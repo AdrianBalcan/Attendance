@@ -61,22 +61,10 @@
 
             <%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee.id, firstname: @employee.firstname, lastname: @employee.lastname), class: "btn btn-success" %>
             <%= link "Editeaza Angajat", to: employee_path(@conn, :edit, @id), class: "btn btn-primary" %>
-            <%= link "Inapoi", to: employee_path(@conn, :index), class: "btn btn-Button" %>
 
       </tr>
 
 <ul>
-
-
-
-
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-
 
 </ul>
 
