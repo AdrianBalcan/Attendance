@@ -22,7 +22,9 @@ defmodule Attendance.AttendanceController do
   end
 
   def create(conn, %{"attendance" => attendance_params}) do
+    IO.inspect attendance_params
     changeset = Attendance.changeset(%Attendance{}, attendance_params)
+    IO.inspect changeset
 
     case Repo.insert(changeset) do
       {:ok, _attendance} ->
