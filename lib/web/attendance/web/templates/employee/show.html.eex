@@ -59,8 +59,7 @@
 
       <tr class="form-actions">
 
-            <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-success"><i class="icon-plus icon-white"></i> Adauga amprenta</a>
-            <%=# link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee.id, firstname: @employee.firstname, lastname: @employee.lastname), class: "btn btn-success" %>
+            <%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee.id, firstname: @employee.firstname, lastname: @employee.lastname), class: "btn btn-success" %>
             <%= link "Editeaza Angajat", to: employee_path(@conn, :edit, @id), class: "btn btn-primary" %>
 
       </tr>
@@ -92,28 +91,3 @@
 <% end %>
   </tbody>
 </table>
-<div class="modal hide in" id="modal-add-event" aria-hidden="false" style="display: none;">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">×</button>
-                  <h3>Adaugare amprenta</h3>
-                </div>
-                <div class="modal-body">
-                  <p>Alege dispozitivul pentru inregistrare:</p>
-                  <p>
-                    <div class="controls">
-                    <%= form_for @changeset, @action, [class: "form-horizontal"], fn f -> %>
-                      <%= hidden_input(f, :employeeID, value: @id) %>
-                      <%= hidden_input(f, :firstname, value: @employee.firstname) %>
-                      <%= hidden_input(f, :lastname, value: @employee.lastname) %>
-            <%= link "Adauga amprenta", to: fingerprint_path(@conn, :new, employeeID: @employee.id, firstname: @employee.firstname, lastname: @employee.lastname), class: "btn btn-success" %>
-                      <%= select f, :device, @devices, class: "span8" %>
-                      <%= error_tag f, :device %>
-                    </div>
-                  </p>
-                </div>
-                <div class="modal-footer">
-                  <a href="#" class="btn" data-dismiss="modal">Inapoi</a>
-                  <%= submit "Adauga Amprenta", class: "btn btn-primary" %>
-                </div>
-              </div>
-            <% end %>
