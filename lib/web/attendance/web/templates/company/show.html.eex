@@ -1,47 +1,69 @@
-<h2>Show company</h2>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/companies">Companii</a> <a><%= @company.name %></a></div>
 
-<ul>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span7">
+      <div class="widget-box">
+        <div class="widget-title"> <span class="icon"> <i class="icon-user"></i> </span>
+          <h5>Detalii Companie</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered table-striped">
+            <thead>
+            </thead>
+            <tbody>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @company.name %>
-  </li>
+              <tr>
+                <td>Nume Companie:</td>
+                <td><%= @company.name %></td>
 
-  <li>
-    <strong>Cui:</strong>
-    <%= @company.cui %>
-  </li>
+              </tr>
+              <tr>
+                <td>CUI:</td>
+                <td><%= @company.cui %></td>
 
-  <li>
-    <strong>Nrc:</strong>
-    <%= @company.nrc %>
-  </li>
+              </tr>
+              <tr>
+                <td>NRC:</td>
+                <td><%= @company.nrc %></td>
 
-  <li>
-    <strong>Adresa:</strong>
-    <%= @company.adresa %>
-  </li>
+              </tr>
+              <tr">
+                <td>Adresa:</td>
+                <td><%= @company.adresa %></td>
 
-  <li>
-    <strong>Localitate:</strong>
-    <%= @company.localitate %>
-  </li>
+              </tr>
+              <tr>
+                <td>Localitatea:</td>
+                <td><%= @company.localitate %></td>
 
-  <li>
-    <strong>Judet:</strong>
-    <%= @company.judet %>
-  </li>
+              </tr>
+              <tr>
+                <td>Judet:</td>
+                <td><%= @company.judet %></td>
 
-  <li>
-    <strong>Telefon:</strong>
-    <%= @company.telefon %>
-  </li>
+              </tr>
+              <tr>
+                <td>Telefon:</td>
+                <td><%= @company.telefon %></td>
 
-  <li>
-    <strong>User_id:</strong>
-    <%= @company.user_id %>
-  </li>
-</ul>
+              </tr>
+              <tr>
+                <td>ID:</td>
+                <td><%= @company.user_id %></td>
 
-<%= link "Edit", to: company_path(@conn, :edit, @company) %>
-<%= link "Back", to: company_path(@conn, :index) %>
+
+
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+
+      <tr class="form-actions">
+
+      <%= link "Editeaza", to: company_path(@conn, :edit, @company), class: "btn btn-primary"  %>
+
+      </tr>
