@@ -40,8 +40,7 @@ defmodule Attendance.EmployeeController do
     if(to_string(employee.user_id) == to_string(current_user_id)) do
       fingerprints = Repo.all(from f in Attendance.Fingerprint, where: f.employeeID == ^id)
       changeset = Attendance.Fingerprint.changeset(%Attendance.Fingerprint{})
-      IO.inspect changeset
-      devices = Repo.all(from d in Attendance.Device, [select: {d.hw, d.hw}, where: d.devicegroup_id == ^1])
+      devices = Repo.all(from d in Attendance.Device, [select: {d.hw, d.hw}, where: d.devicegroup_id == ^employee.devicegroups_id])
       action = fingerprint_path(conn, :create)
       render(conn, "show.html", changeset: changeset, action: action, id: id, fingerprints: fingerprints, employee: employee, devices: devices)
     else
