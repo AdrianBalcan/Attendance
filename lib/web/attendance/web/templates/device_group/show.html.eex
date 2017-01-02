@@ -18,6 +18,11 @@
   </li>
 
   <li>
+    <strong>Fingerprints security:</strong>
+    <%= @device_group.fingerprint_security %>
+  </li>
+
+  <li>
     <strong>User:</strong>
     <%= @device_group.user_id %>
   </li>

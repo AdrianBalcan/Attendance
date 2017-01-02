@@ -5,6 +5,7 @@ defmodule Attendance.DeviceGroup do
     field :name, :string
     field :employee_max_fingerprints, :integer
     field :fingerprints_limit, :integer
+    field :fingerprint_security, :integer
     belongs_to :user, Attendance.User
 
     timestamps()
@@ -18,6 +19,7 @@ defmodule Attendance.DeviceGroup do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, [:name, :employee_max_fingerprints, :fingerprints_limit, :fingerprint_security])
+    |> validate_required([:user_id])
   end
 end

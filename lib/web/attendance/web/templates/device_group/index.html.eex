@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Employee max fingerprints</th>
       <th>Fingerprints limit</th>
+      <th>Fingerprint Security</th>
       <th>User</th>
 
       <th></th>
@@ -17,6 +18,7 @@
       <td><%= device_group.name %></td>
       <td><%= device_group.employee_max_fingerprints %></td>
       <td><%= device_group.fingerprints_limit %></td>
+      <td><%= device_group.fingerprint_security %></td>
       <td><%= device_group.user_id %></td>
 
       <td class="text-right">

@@ -12,6 +12,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :Sensibilitate_cititor, class: "control-label" %>
+    <%= text_input f, :fingerprint_security, class: "form-control" %>
+    <%= error_tag f, :fingerprint_security %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
