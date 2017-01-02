@@ -1,4 +1,6 @@
-<h2>Listing devicegroups</h2>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/devicegroups">Devuce Groups</a></div>
+</div>
 
 <table class="table">
   <thead>
