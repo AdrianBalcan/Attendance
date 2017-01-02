@@ -2,13 +2,11 @@ defmodule Attendance.DeviceGroupController do
   use Attendance.Web, :controller
 
   plug Attendance.Plug.Authenticate
-   
+
   alias Attendance.DeviceGroup
 
   def index(conn, _params) do
-    current_user_id = get_session(conn, :current_user).id
-    devicegroups = Repo.all(from dg in DeviceGroup, where: dg.user_id == ^current_user_id)
-    render(conn, "index.html", devicegroups: devicegroups)
+    redirect(conn, to: device_path(conn, :index))
   end
 
   def new(conn, _params) do

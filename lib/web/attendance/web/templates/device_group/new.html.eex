@@ -1,6 +1,18 @@
-<h2>New device group</h2>
+<div id="content-header">
+  <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/devicegroups">Grup Dispozitive</a> <a href="#" class="current">Adauga Grup</a></div>
 
-<%= render "form.html", changeset: @changeset,
+  <div class="container-fluid">
+  <div class="row-fluid">
+      <div class="span8">
+  <div class="widget-box">
+    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+      <h5>Adauga Grup</h5>
+    </div>
+    <div class="widget-content nopadding">
+
+
+    <%= render "form.html", changeset: @changeset,
                         action: device_group_path(@conn, :create) %>
 
-<%= link "Back", to: device_path(@conn, :index) %>
+                        </div>
+                      </div>
