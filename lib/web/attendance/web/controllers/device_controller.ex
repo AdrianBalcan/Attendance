@@ -7,8 +7,9 @@ defmodule Attendance.DeviceController do
 
   def index(conn, _params) do
     current_user_id = get_session(conn, :current_user).id
+    devicegroups = Repo.all(from dg in DeviceGroup, where: dg.user_id == ^current_user_id)
     devices = Repo.all(from d in Attendance.Device, join: dg in DeviceGroup, on: d.devicegroup_id == dg.id, where: dg.user_id == ^current_user_id)
-    render(conn, "index.html", devices: devices)
+    render(conn, "index.html", devicegroups: devicegroups, devices: devices)
   end
 
   def new(conn, _params) do
@@ -21,7 +22,6 @@ defmodule Attendance.DeviceController do
   def create(conn, %{"device" => device_params}) do
     current_user_id = get_session(conn, :current_user).id
     changeset = Device.changeset(%Device{}, device_params)
-    IO.inspect device_params
     case Repo.insert(changeset) do
       {:ok, _device} ->
         Attendance.Endpoint.broadcast "sp:" <> device_params["hw"], "new:msg", %{"response" => %{"type" => "devicegroup-create", "result" => device_params["devicegroup_id"]}}

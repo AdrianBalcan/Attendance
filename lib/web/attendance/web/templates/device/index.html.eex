@@ -3,44 +3,49 @@
 </div>
 
 <div class="container-fluid">
-<div class="row-fluid">
-
-    <div class="span12">
-
-    <div class="widget-box">
-      <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-        <h5>Dispozitive</h5>
-
+    <div class="row-fluid">
+        <div class="pull-left">
+          <%= link "Adauga grup", to: device_group_path(@conn, :new), class: "btn btn-primary btn-xs" %>
         </div>
-        <div class="widget-content nopadding">
-          <table class="table table-bordered table-striped">
+    </div>
+    <div class="row-fluid">
+<%= for devicegroup <- @devicegroups do %>
+      <div class="span4">
+        <div class="widget-box">
+          <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span>
+            <h5><code><%= devicegroup.id %></code> Grup: <%= devicegroup.name %></h5>
+            <div class="buttons">
+              <%= link "Adauga dispozitiv", to: device_path(@conn, :new), class: "btn btn-success btn-mini" %>
+            </div>
+          </div>
+	  <div class="widget-content nopadding">
+            <table class="table table-bordered table-striped">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Serie</th>
-                  <th>Grup</th>
                   <th>Locatie</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-
-
-<%= for device <- @devices do %>
-    <tr>
-      <td><%= device.hw %></td>
-      <td><%= device.location %></td>
-      <td><%= device.devicegroup_id %></td>
-      <td>Locatie</td>
-
-
-      <td class="text-right">
-        <%= link "Show", to: device_path(@conn, :show, device), class: "btn btn-default btn-xs" %>
-      </td>
-    </tr>
-    </tr>
-          <% end %>
-
-        </tbody>
-      </table>
-    </div>
+                <%= for device <- @devices do %>
+                  <%= if(device.devicegroup_id == devicegroup.id) do %>
+                    <tr>
+                    <td><%= device.id %></td>
+                    <td><%= device.hw %></td>
+                    <td><%= device.location %></td>
+                    <td class="text-right">
+                      <%= link "Detalii", to: device_path(@conn, :show, device), class: "btn btn-default btn-mini" %>
+                    </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
+</div>
