@@ -2,9 +2,10 @@ defmodule Attendance.Fingerprint do
   use Attendance.Web, :model
 
   schema "fingerprints" do
+    field :f_id, :integer
     field :employeeID, :integer
     field :template, :binary
-    field :active, :boolean, default: true
+    field :active, :boolean
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule Attendance.Fingerprint do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:employeeID, :template, :active])
-    |> validate_required([:employeeID, :template, :active])
+    |> cast(params, [:f_id, :employeeID, :template, :active])
+    |> validate_required([:f_id, :employeeID, :template])
   end
 end

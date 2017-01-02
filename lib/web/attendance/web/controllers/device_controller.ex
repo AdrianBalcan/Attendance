@@ -21,9 +21,10 @@ defmodule Attendance.DeviceController do
   def create(conn, %{"device" => device_params}) do
     current_user_id = get_session(conn, :current_user).id
     changeset = Device.changeset(%Device{}, device_params)
-
+    IO.inspect device_params
     case Repo.insert(changeset) do
       {:ok, _device} ->
+        Attendance.Endpoint.broadcast "sp:" <> device_params["hw"], "new:msg", %{"response" => %{"type" => "devicegroup-create", "result" => device_params["devicegroup_id"]}}
         conn
         |> put_flash(:info, "Dispozitivul a fost adaugat in contul dumneavoastra.")
         |> redirect(to: device_path(conn, :index))
