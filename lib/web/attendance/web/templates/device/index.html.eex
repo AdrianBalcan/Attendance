@@ -24,9 +24,11 @@
               </thead>
               <tbody>
 
+
 <%= for device <- @devices do %>
     <tr>
       <td><%= device.hw %></td>
+      <td><%= device.location %></td>
       <td><%= device.devicegroup_id %></td>
       <td>Locatie</td>
 

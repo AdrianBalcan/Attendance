@@ -19,6 +19,10 @@
     <label>Prenume</label>
     <%= text_input f, :firstname, class: "form-control" %>
   </div>
+  <div class="form-group">
+    <label>Telefon</label>
+    <%= text_input f, :phone, class: "form-control" %>
+  </div>
   <%= inputs_for f, :companies, fn cf -> %>
   <div class="form-group">
     <label>Companie/Proiect</label>
