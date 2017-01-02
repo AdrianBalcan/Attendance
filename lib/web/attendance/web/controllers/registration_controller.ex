@@ -26,6 +26,7 @@ defmodule Attendance.RegistrationController do
     changeset = User.changeset(%User{
         devicegroups: [%Attendance.DeviceGroup{}]
     }, user_params)
+    IO.inspect changeset
     if changeset.valid? do
       changeset = (Password.generate_password(changeset))
       case Repo.insert(changeset) do

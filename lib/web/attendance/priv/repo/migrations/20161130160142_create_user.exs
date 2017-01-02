@@ -5,6 +5,7 @@ defmodule Attendance.Repo.Migrations.CreateUser do
     create table(:users) do
       add :firstname, :string
       add :lastname, :string
+      add :phone, :string
       add :email, :string
       add :encrypted_password, :string
 

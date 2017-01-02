@@ -25,6 +25,11 @@
 
               </tr>
               <tr>
+                <td>Telefon:</td>
+                <td><%= @employee.phone %></td>
+
+              </tr>
+              <tr>
                 <td>Companie:</td>
                 <td><%= @employee.companies_id %></td>
 

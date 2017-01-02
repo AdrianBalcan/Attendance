@@ -8,20 +8,28 @@
   <div class="control-group">
     <%= label f, :Cod_dispozitiv, class: "control-label" %>
     <div class="controls">
-    <%= text_input f, :hw, class: "form-control" %>
-    <%= error_tag f, :hw %>
+      <%= text_input f, :hw, class: "form-control" %>
+      <%= error_tag f, :hw %>
     </div>
   </div>
 
-<div class="control-group">
-    <%= label f, "Grup", class: "control-label" %>
+  <div class="control-group">
+    <%= label f, :Locatie_dispozitiv, class: "control-label" %>
     <div class="controls">
-    <%= select f, :devicegroup_id, @devicegroups, class: "form-control" %>
-    <%= error_tag f, :devicegroups_id %>
+      <%= text_input f, :location, class: "form-control" %>
+      <%= error_tag f, :location %>
+    </div>
   </div>
-</div>
 
-    <div class="form-actions">
+  <div class="control-group">
+    <%= label f, :Grup, class: "control-label" %>
+    <div class="controls">
+      <%= select f, :devicegroup_id, @devicegroups, class: "form-control" %>
+      <%= error_tag f, :devicegroups_id %>
+    </div>
+  </div>
+
+  <div class="form-actions">
     <%= submit "Salveaza", class: "btn btn-primary" %>
   </div>
 

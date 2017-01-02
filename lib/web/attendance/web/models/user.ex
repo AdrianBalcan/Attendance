@@ -4,6 +4,7 @@ defmodule Attendance.User do
   schema "users" do
     field :firstname, :string
     field :lastname, :string
+    field :phone, :string
     field :email, :string, unique: true
     field :encrypted_password, :string
     field :password, :string, virtual: true
@@ -15,18 +16,15 @@ defmodule Attendance.User do
     timestamps()
   end
   
-  @required_fields ~w(firstname lastname email password password_confirmation)
-  @optional_fields ~w()
-
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(model, params \\ %{}) do
-    cast(model, params, ~w(firstname lastname email password password_confirmation))
+    cast(model, params, ~w(firstname lastname phone email password password_confirmation))
     #cast(model, params, [:firstname, :lastname, :email, :password, :password_confirmation])
     |> cast_assoc(:companies)
     |> cast_assoc(:devicegroups)
-    |> validate_required([:firstname, :lastname, :email])
+    |> validate_required([:firstname, :lastname, :email, :phone])
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email, on: Attendance.Repo, downcase: true)
     |> validate_length(:password, min: 1)

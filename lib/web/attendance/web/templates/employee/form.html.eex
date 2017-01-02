@@ -24,6 +24,14 @@
   </div>
 
   <div class="control-group">
+    <%= label f, :Telefon, class: "control-label" %>
+    <div class="controls">
+      <%= text_input f, :phone, class: "span8", placeholder: "Telefon" %>
+      <%= error_tag f, :phone %>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= label f, "Companie/Proiect", class: "control-label" %>
     <div class="controls">
       <%= select f, :companies_id, @companies, class: "span8" %>
