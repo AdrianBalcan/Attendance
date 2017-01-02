@@ -1,32 +1,46 @@
 <div id="content-header">
     <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="/devices">Dispozitive</a></div>
+</div>
+
+<div class="container-fluid">
+<div class="row-fluid">
+
+    <div class="span12">
+
+    <div class="widget-box">
+      <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+        <h5>Dispozitive</h5>
+
+        </div>
+        <div class="widget-content nopadding">
+          <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Serie</th>
+                  <th>Grup</th>
+                  <th>Locatie</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Hw</th>
-      <th>Locatie</th>
-      <th>Devicegroup</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
 <%= for device <- @devices do %>
     <tr>
       <td><%= device.hw %></td>
       <td><%= device.location %></td>
       <td><%= device.devicegroup_id %></td>
+      <td>Locatie</td>
+
 
       <td class="text-right">
         <%= link "Show", to: device_path(@conn, :show, device), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: device_path(@conn, :edit, device), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: device_path(@conn, :delete, device), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
-<% end %>
-  </tbody>
-</table>
+    </tr>
+          <% end %>
 
-<%= link "New device", to: device_path(@conn, :new) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
