@@ -24,7 +24,7 @@ defmodule Attendance.DeviceGroupController do
       {:ok, _device_group} ->
         conn
         |> put_flash(:info, "Device group created successfully.")
-        |> redirect(to: device_group_path(conn, :index))
+        |> redirect(to: device_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
