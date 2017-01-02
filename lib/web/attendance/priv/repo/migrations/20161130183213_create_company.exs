@@ -9,7 +9,7 @@ defmodule Attendance.Repo.Migrations.CreateCompany do
       add :adresa, :string
       add :localitate, :string
       add :judet, :string
-      add :telefon, :integer
+      add :telefon, :string
       add :user_id, references(:users)
 
       timestamps()

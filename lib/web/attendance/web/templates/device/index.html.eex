@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Hw</th>
+      <th>Locatie</th>
       <th>Devicegroup</th>
 
       <th></th>
@@ -15,6 +16,7 @@
 <%= for device <- @devices do %>
     <tr>
       <td><%= device.hw %></td>
+      <td><%= device.location %></td>
       <td><%= device.devicegroup_id %></td>
 
       <td class="text-right">

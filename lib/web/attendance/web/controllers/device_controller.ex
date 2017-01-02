@@ -7,7 +7,6 @@ defmodule Attendance.DeviceController do
 
   def index(conn, _params) do
     current_user_id = get_session(conn, :current_user).id
-    devices = Repo.all(Device)
     devices = Repo.all(from d in Attendance.Device, join: dg in DeviceGroup, on: d.devicegroup_id == dg.id, where: dg.user_id == ^current_user_id)
     render(conn, "index.html", devices: devices)
   end
@@ -36,7 +35,7 @@ defmodule Attendance.DeviceController do
 
   def show(conn, %{"id" => id}) do
     current_user_id = get_session(conn, :current_user).id
-    [device] = Repo.all(from d in Attendance.Device, join: dg in DeviceGroup, on: d.devicegroup_id == dg.id, select: %{id: d.id, hw: d.hw, devicegroup_id: d.devicegroup_id, user_id: dg.user_id}, where: d.id == ^id)
+    [device] = Repo.all(from d in Attendance.Device, join: dg in DeviceGroup, on: d.devicegroup_id == dg.id, select: %{id: d.id, hw: d.hw, location: d.location, devicegroup_id: d.devicegroup_id, user_id: dg.user_id}, where: d.id == ^id)
     if(to_string(device.user_id) == to_string(current_user_id)) do
       render(conn, "show.html", device: device)
     else
@@ -62,8 +61,8 @@ defmodule Attendance.DeviceController do
   def update(conn, %{"id" => id, "device" => device_params}) do
     current_user_id = get_session(conn, :current_user).id
     devicegroup_id = device_params["devicegroup_id"]
-    [device] = Repo.all(from dg in Attendance.DeviceGroup, select: dg.user_id, where: dg.id == ^devicegroup_id)
-    if(current_user_id == device) do
+    [secure] = Repo.all(from dg in Attendance.DeviceGroup, select: dg.user_id, where: dg.id == ^devicegroup_id)
+    if(current_user_id == secure) do
       device = Repo.get!(Device, id)
       changeset = Device.changeset(device, device_params)
 

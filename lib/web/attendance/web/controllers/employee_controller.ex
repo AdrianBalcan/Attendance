@@ -36,7 +36,7 @@ defmodule Attendance.EmployeeController do
 
   def show(conn, %{"id" => id}) do
     current_user_id = get_session(conn, :current_user).id
-    [employee] = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, select: %{id: e.id, firstname: e.firstname, lastname: e.lastname, companies_id: e.companies_id, devicegroups_id: e.devicegroups_id, job: e.job, team: e.team, dob: e.dob, active: e.active, user_id: c.user_id, inserted_at: e.inserted_at, updated_at: e.updated_at}, where: e.id == ^id)
+    [employee] = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, select: %{id: e.id, firstname: e.firstname, lastname: e.lastname, phone: e.phone, companies_id: e.companies_id, devicegroups_id: e.devicegroups_id, job: e.job, team: e.team, dob: e.dob, active: e.active, user_id: c.user_id, inserted_at: e.inserted_at, updated_at: e.updated_at}, where: e.id == ^id)
     if(to_string(employee.user_id) == to_string(current_user_id)) do
       fingerprints = Repo.all(from f in Attendance.Fingerprint, where: f.employeeID == ^id)
       changeset = Attendance.Fingerprint.changeset(%Attendance.Fingerprint{})
