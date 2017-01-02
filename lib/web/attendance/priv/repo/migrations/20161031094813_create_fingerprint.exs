@@ -6,7 +6,7 @@ defmodule Attendance.Repo.Migrations.CreateFingerprint do
       add :f_id, :integer
       add :employeeID, :integer
       add :template, :binary
-      add :active, :boolean, default: false, null: false
+      add :active, :boolean
 
       timestamps()
     end

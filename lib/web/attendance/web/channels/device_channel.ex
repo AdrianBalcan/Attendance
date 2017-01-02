@@ -16,17 +16,26 @@ defmodule Attendance.DeviceChannel do
          {:reply, {:ok, %{type: message["type"], result: result}}, socket}
        message["type"] == "keep_alive" ->
          {:reply, :error, socket}
+       message["type"] == "enroll-ok" ->
+         changeset = Attendance.Fingerprint.changeset(%Attendance.Fingerprint{}, %{"employeeID" => message["employeeID"], "template" => message["template"], "f_id" => message["f_id"]})
+         IO.inspect changeset
+         case Attendance.Repo.insert(changeset) do
+           {:ok, changeset} ->
+             {:reply, :ok, socket}
+           {:error, changeset} ->
+             {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
+           end
        message["type"] == "identify-ok" ->
-       changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["id"]})
-       case Attendance.Repo.insert(changeset) do
-         {:ok, changeset} ->
-           {:reply, :ok, socket}
-         {:error, changeset} ->
-           {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
-         end
-       true ->
-         {:reply, {:ok, %{response: "nothing here"}}, socket}
-     end
+         changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["id"]})
+         case Attendance.Repo.insert(changeset) do
+           {:ok, changeset} ->
+             {:reply, :ok, socket}
+           {:error, changeset} ->
+             {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
+           end
+         true ->
+           {:reply, {:ok, %{response: "nothing here"}}, socket}
+       end
   end   
 
   def terminate(reason, _socket) do

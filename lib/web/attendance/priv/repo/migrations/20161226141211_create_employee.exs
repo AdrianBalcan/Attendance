@@ -11,7 +11,7 @@ defmodule Attendance.Repo.Migrations.CreateEmployee do
       add :job, :string
       add :team, :string
       add :dob, :date
-      add :active, :boolean, default: true, null: false
+      add :active, :boolean
 
       timestamps()
     end
