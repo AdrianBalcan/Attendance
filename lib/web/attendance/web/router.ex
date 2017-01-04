@@ -23,6 +23,7 @@ defmodule Attendance.Router do
     get "/stats", PageController, :index
     get "/registration", RegistrationController, :new
     post "/registration", RegistrationController, :create
+    post "/fingerprints/cancelEnrollment", FingerprintController, :cancelEnrollment
     resources "/fingerprints", FingerprintController
     resources "/attendances", AttendanceController
     resources "/companies", CompanyController
