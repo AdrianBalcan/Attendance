@@ -43,6 +43,16 @@ defmodule Attendance.FingerprintController do
 #    end
   end
 
+  def cancelEnrollment(conn, %{"fingerprint" => fingerprint_params}) do
+
+     Attendance.Endpoint.broadcast "sp:" <> fingerprint_params["device"], "new:msg", %{"response" => %{"type" => "cancelEnrollment", "employeeID" => fingerprint_params["employeeID"], "firstname" => fingerprint_params["firstname"], "lastname" => fingerprint_params["lastname"]}}
+ 
+       conn
+       |> put_flash(:info, "Inregistrarea angajatului a fost anulata.")
+       |> redirect(to: employee_path(conn, :show, fingerprint_params["employeeID"]))
+  end
+
+
   def show(conn, %{"id" => id}) do
     fingerprint = Repo.get!(Fingerprint, id)
     render(conn, "show.html", fingerprint: fingerprint)

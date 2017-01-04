@@ -18,7 +18,6 @@ defmodule Attendance.DeviceChannel do
          {:reply, :error, socket}
        message["type"] == "enroll-ok" ->
          changeset = Attendance.Fingerprint.changeset(%Attendance.Fingerprint{}, %{"employeeID" => message["employeeID"], "template" => message["template"], "f_id" => message["f_id"]})
-         IO.inspect changeset
          case Attendance.Repo.insert(changeset) do
            {:ok, changeset} ->
              {:reply, :ok, socket}

@@ -42,7 +42,8 @@ defmodule Attendance.EmployeeController do
       changeset = Attendance.Fingerprint.changeset(%Attendance.Fingerprint{})
       devices = Repo.all(from d in Attendance.Device, [select: {d.hw, d.hw}, where: d.devicegroup_id == ^employee.devicegroups_id])
       action = fingerprint_path(conn, :create)
-      render(conn, "show.html", changeset: changeset, action: action, id: id, fingerprints: fingerprints, employee: employee, devices: devices)
+      cancelEnrollmentAction = fingerprint_path(conn, :cancelEnrollment)
+      render(conn, "show.html", changeset: changeset, cancelEnrollmentAction: cancelEnrollmentAction, action: action, id: id, fingerprints: fingerprints, employee: employee, devices: devices)
     else
       redirect(conn, to: employee_path(conn, :index))
     end
