@@ -79,14 +79,19 @@ defmodule Attendance.FingerprintController do
   end
 
   def delete(conn, %{"id" => id}) do
+    current_user_id = get_session(conn, :current_user).id
+    devices = Repo.all(from dg in Attendance.DeviceGroup, join: d in Attendance.Device, on: dg.id == d.devicegroup_id, select: d.hw, where: dg.user_id == ^current_user_id)
     fingerprint = Repo.get!(Fingerprint, id)
+    for device <- devices, do:
+      Attendance.Endpoint.broadcast "sp:" <> device, "new:msg", %{"response" => %{"type" => "deleteFingerprint", "id" => fingerprint.f_id}}
+
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(fingerprint)
 
     conn
-    |> put_flash(:info, "Statia este pregatita pentru inregistrarea angajatului.")
+    |> put_flash(:info, "Amprenta a fost stearsa!")
     |> redirect(to: employee_path(conn, :show, fingerprint.employeeID))
   end
 end
