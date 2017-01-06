@@ -30,7 +30,7 @@ defmodule Attendance.RegistrationController do
     if changeset.valid? do
       changeset = (Password.generate_password(changeset))
       case Repo.insert(changeset) do
-        {:ok, changeset} ->
+        {:ok, _changeset} ->
           conn
             |> put_flash(:info, "Contul dumneavoastra a fost creat!")
             |> redirect(to: session_path(conn, :new))

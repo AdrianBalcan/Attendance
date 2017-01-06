@@ -17,7 +17,7 @@ defmodule Attendance.Plug.Authenticate do
 
     def init(default), do: default
 
-  def call(conn, default) do
+  def call(conn, _default) do
     current_user = get_session(conn, :current_user)
     if current_user do
       session_time = current_user.loggedin - (:calendar.datetime_to_gregorian_seconds(Ecto.DateTime.to_erl(Ecto.DateTime.utc)))

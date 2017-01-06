@@ -41,6 +41,7 @@ defmodule Attendance.Mixfile do
      {:cowboy, "~> 1.0"},
      {:plug, "~>1.3"},
      {:poison, "~> 3.0", override: true},
+     {:dogma, "~> 0.1", only: :dev},
      {:comeonin, "~> 3.0"}]
   end
 
