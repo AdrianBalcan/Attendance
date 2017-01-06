@@ -11,25 +11,30 @@ defmodule Attendance.DeviceChannel do
      cond do
        message["type"] == "devicegroup" ->
          hw = message["hw"]
-         result = Repo.all(from d in Attendance.Device, select: d.devicegroup_id, where: d.hw == ^hw)
-         if(length(result) == 0) do result = [0] end
+         query = Repo.all(from d in Attendance.Device, select: d.devicegroup_id, where: d.hw == ^hw)
+         #if(length(query) == 0) do result = [0] else result = query end
+         result =
+           case query do
+             0 -> [0] 
+             _ -> query
+           end 
          {:reply, {:ok, %{type: message["type"], result: result}}, socket}
        message["type"] == "keep_alive" ->
          {:reply, :error, socket}
        message["type"] == "enroll-ok" ->
          changeset = Attendance.Fingerprint.changeset(%Attendance.Fingerprint{}, %{"employeeID" => message["employeeID"], "template" => message["template"], "f_id" => message["f_id"]})
          case Attendance.Repo.insert(changeset) do
-           {:ok, changeset} ->
+           {:ok, _changeset} ->
              {:reply, :ok, socket}
-           {:error, changeset} ->
+           {:error, _changeset} ->
              {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
            end
        message["type"] == "identify-ok" ->
          changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["id"]})
          case Attendance.Repo.insert(changeset) do
-           {:ok, changeset} ->
+           {:ok, _changeset} ->
              {:reply, :ok, socket}
-           {:error, changeset} ->
+           {:error, _changeset} ->
              {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
            end
          true ->

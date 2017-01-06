@@ -9,7 +9,7 @@ defmodule Attendance.FingerprintController do
     render(conn, "index.html", fingerprints: fingerprints)
   end
 
-  def new(conn, %{"employeeID" => employeeID, "firstname" => firstname, "lastname" => lastname}) do
+#  def new(conn, %{"employeeID" => employeeID, "firstname" => firstname, "lastname" => lastname}) do
     #Attendance.Endpoint.broadcast "sp:NzA4MzUwMDE4NjQxNzI=0", "new:msg", %{"response" => %{"type" => "enroll", "employeeID" => employeeID, "firstname" => firstname, "lastname" => lastname}}
    #    body = "{\"name\": \"#{firstname} #{lastname}\", \"employeeID\": \"#{employeeID}\"}"
 
@@ -20,10 +20,10 @@ defmodule Attendance.FingerprintController do
    #   true ->
    #     put_flash(conn, :danger, "Eroare! Nu este conexiune cu statia!")
    # end
-    conn
-    |> put_flash(:info, "Statia este pregatita pentru inregistrarea angajatului.")
-    |> redirect(to: employee_path(conn, :show, employeeID))
-  end
+#    conn
+#    |> put_flash(:info, "Statia este pregatita pentru inregistrarea angajatului.")
+#    |> redirect(to: employee_path(conn, :show, employeeID))
+#  end
 
   def create(conn, %{"fingerprint" => fingerprint_params}) do
 #    changeset = Fingerprint.changeset(%Fingerprint{}, fingerprint_params)
