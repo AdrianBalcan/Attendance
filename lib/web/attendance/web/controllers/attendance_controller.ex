@@ -9,7 +9,6 @@ defmodule Attendance.AttendanceController do
     current_user_id = get_session(conn, :current_user).id
     attendances = Repo.all(from a in Attendance, join: e in Employee, on: a.employeeID == e.id, select: %{id: a.employeeID, name: e.firstname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status})
     #attendances = Repo.all(Attendance)
-    IO.inspect attendances
     render(conn, "index.html", attendances: attendances)
   end
 
