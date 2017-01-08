@@ -1,28 +1,34 @@
-<h2>Listing attendances</h2>
+  <div id="content-header">
+    <div id="breadcrumb"> <a href="/" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Rapoarte</a> </div>
+  </div>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Pontat</th>
-      <th>Employeeid</th>
-
+      <th>Nume</th>
+      <th>Dispozitiv</th>
+      <th>Grupul</th>
+      <th>Data/Ora</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for attendance <- @attendances do %>
     <tr>
-      <td><%= attendance.inserted_at %></td>
-      <td><%= attendance.employeeID %></td>
+      <td><%= attendance.name %></td>
+      <td><%= attendance.device %></td>
+      <td><%= attendance.devicegroup %></td>
+      <td><%= attendance.timestamp %></td>
+      <td><%= attendance.status %></td>
 
       <td class="text-right">
-        <%= link "Show", to: attendance_path(@conn, :show, attendance), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: attendance_path(@conn, :edit, attendance), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: attendance_path(@conn, :delete, attendance), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: attendance_path(@conn, :show, attendance.id), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: attendance_path(@conn, :edit, attendance.id), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: attendance_path(@conn, :delete, attendance.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New attendance", to: attendance_path(@conn, :new) %>

@@ -29,8 +29,10 @@ defmodule Attendance.DeviceChannel do
            {:error, _changeset} ->
              {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
            end
+
        message["type"] == "identify-ok" ->
-         changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["id"]})
+         changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["employeeID"], "f_id" => message["f_id"], "device_hw" => message["device_hw"], "devicegroup_id" => message["devicegroup_id"]})
+         IO.inspect changeset
          case Attendance.Repo.insert(changeset) do
            {:ok, _changeset} ->
              {:reply, :ok, socket}
