@@ -3,6 +3,10 @@ defmodule Attendance.Attendance do
 
   schema "attendances" do
     field :employeeID, :integer
+    field :f_id, :integer
+    field :device_hw, :string
+    field :devicegroup_id, :integer
+    field :status, :string
 
     timestamps()
   end
@@ -12,7 +16,7 @@ defmodule Attendance.Attendance do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:employeeID])
+    |> cast(params, [:employeeID, :status, :f_id, :device_hw, :devicegroup_id])
     |> validate_required([:employeeID])
   end
 end

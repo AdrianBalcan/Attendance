@@ -2,17 +2,14 @@ defmodule Attendance.AttendanceController do
   use Attendance.Web, :controller
 
   plug Attendance.Plug.Authenticate
-
-  def put_headers(conn, key_values) do
-    Enum.reduce key_values, conn, fn {k, v}, conn ->
-      put_resp_header(conn, to_string(k), v)
-    end
-  end
-
+  alias Attendance.Employee
   alias Attendance.Attendance
 
   def index(conn, _params) do
-    attendances = Repo.all(Attendance)
+    current_user_id = get_session(conn, :current_user).id
+    attendances = Repo.all(from a in Attendance, join: e in Employee, on: a.employeeID == e.id, select: %{id: a.employeeID, name: e.firstname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status})
+    #attendances = Repo.all(Attendance)
+    IO.inspect attendances
     render(conn, "index.html", attendances: attendances)
   end
 
@@ -55,7 +52,7 @@ defmodule Attendance.AttendanceController do
       {:ok, attendance} ->
         conn
         |> put_flash(:info, "Attendance updated successfully.")
-        |> redirect(to: attendance_path(conn, :show, attendance))
+        |> redirect(to: attendance_path(conn, :index))
       {:error, changeset} ->
         render(conn, "edit.html", attendance: attendance, changeset: changeset)
     end

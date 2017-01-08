@@ -4,9 +4,10 @@ defmodule Attendance.Repo.Migrations.CreateAttendance do
   def change do
     create table(:attendances) do
       add :employeeID, :integer
-      add :device_id, :integer
+      add :f_id, :integer
+      add :device_hw, :string
       add :devicegroup_id, :integer
-      add :status, :integer
+      add :status, :string
 
       timestamps()
     end

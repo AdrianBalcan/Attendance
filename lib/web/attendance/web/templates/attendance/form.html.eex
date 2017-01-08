@@ -7,8 +7,14 @@
 
   <div class="form-group">
     <%= label f, :employeeID, class: "control-label" %>
-    <%= number_input f, :employeeID, class: "form-control" %>
+    <%= number_input f, :employeeID, [class: "form-control", disabled: "disabled"] %>
     <%= error_tag f, :employeeID %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :status, class: "control-label" %>
+    <%= select(f, :status, ["IN": "IN", "OUT": "OUT"]) %>
+    <%= error_tag f, :status %>
   </div>
 
   <div class="form-group">
