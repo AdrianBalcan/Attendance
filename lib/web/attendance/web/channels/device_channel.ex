@@ -35,7 +35,7 @@ defmodule Attendance.DeviceChannel do
             case Repo.all(from a in Attendance.Attendance, select: a.status, where: a.employeeID == ^message["employeeID"], limit: 1, order_by: [desc: a.id]) do
               ["OUT"] -> "IN"
               ["IN"]  -> "OUT"
-              _     -> "IN"
+              _       -> "IN"
             end
          IO.inspect status
          changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["employeeID"], "f_id" => message["f_id"], "device_hw" => message["device_hw"], "devicegroup_id" => message["devicegroup_id"], "status" => status})

@@ -7,7 +7,7 @@ defmodule Attendance.AttendanceController do
 
   def index(conn, _params) do
     current_user_id = get_session(conn, :current_user).id
-    attendances = Repo.all(from a in Attendance, join: e in Employee, on: a.employeeID == e.id, select: %{id: a.employeeID, name: e.firstname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status})
+    attendances = Repo.all(from a in Attendance, join: e in Employee, on: a.employeeID == e.id, select: %{id: a.employeeID, firstname: e.firstname, lastname: e.lastname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status}, order_by: [desc: a.inserted_at])
     #attendances = Repo.all(Attendance)
     render(conn, "index.html", attendances: attendances)
   end

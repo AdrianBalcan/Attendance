@@ -31,7 +31,7 @@
             <tbody>
               <%= for attendance <- @attendances do %>
                 <tr>
-                  <td><%= attendance.name %></td>
+                  <td><%= attendance.firstname <> " " <> attendance.lastname %></td>
                   <td><%= attendance.device %></td>
                   <td><%= attendance.devicegroup %></td>
                   <td><%= attendance.timestamp %></td>
