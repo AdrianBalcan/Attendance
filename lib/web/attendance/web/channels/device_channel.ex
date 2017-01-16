@@ -37,11 +37,10 @@ defmodule Attendance.DeviceChannel do
               ["IN"]  -> "OUT"
               _       -> "IN"
             end
-         IO.inspect status
          changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["employeeID"], "f_id" => message["f_id"], "device_hw" => message["device_hw"], "devicegroup_id" => message["devicegroup_id"], "status" => status})
          case Attendance.Repo.insert(changeset) do
            {:ok, _changeset} ->
-             {:reply, :ok, socket}
+             {:reply, {:ok, %{type: message["type"], employeeID: message["employeeID"], result: status}}, socket}
            {:error, _changeset} ->
              {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
            end
@@ -50,8 +49,7 @@ defmodule Attendance.DeviceChannel do
        end
   end   
 
-  def terminate(reason, _socket) do
-    IO.inspect reason
+  def terminate(_reason, _socket) do
     :ok
   end
 
