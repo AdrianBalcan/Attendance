@@ -5,7 +5,8 @@
   <div class="row-fluid">
     <div class="span7">
       <div class="widget-box">
-        <div class="widget-title"> <span class="icon"> <i class="icon-user"></i> </span>
+        <div class="widget-title">
+          <span class="icon"> <i class="icon-user"></i></span>
           <h5>Detalii Angajat</h5>
         </div>
         <div class="widget-content nopadding">
@@ -13,131 +14,107 @@
             <thead>
             </thead>
             <tbody>
-
               <tr>
                 <td>Prenume:</td>
                 <td><%= @employee.firstname %></td>
-
               </tr>
               <tr>
                 <td>Nume:</td>
                 <td><%= @employee.lastname %></td>
-
               </tr>
               <tr>
                 <td>Telefon:</td>
                 <td><%= @employee.phone %></td>
-
               </tr>
               <tr>
                 <td>Companie:</td>
                 <td><%= @employee.companies_id %></td>
-
               </tr>
               <tr>
                 <td>Pozitie:</td>
                 <td><%= @employee.job %></td>
-
               </tr>
               <tr>
                 <td>Echipa:</td>
                 <td><%= @employee.team %></td>
-
               </tr>
               <tr>
                 <td>Data nasterii:</td>
                 <td><%= @employee.dob %></td>
-
               </tr>
-              <tr>
-                <td>Activ:</td>
-                <td><%= @employee.active %></td>
-
-
-
             </tbody>
           </table>
         </div>
       </div>
-
-      <tr class="form-actions">
-            <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-success"><i class="icon-plus icon-white"></i> Adauga amprenta</a>
-            <%= link "Editeaza Angajat", to: employee_path(@conn, :edit, @id), class: "btn btn-primary" %>
-            <a id="add-event" data-toggle="modal" href="#modal-cancelEnrollment" class="btn btn-danger"><i class="icon-plus icon-white"></i> Anuleaza adaugarea amprentei</a>
-      </tr>
-
-<ul>
-
-</ul>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Amprente</th>
-      <th>Active</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for fingerprint <- @fingerprints do %>
-    <tr>
-      <td><%= fingerprint.id %></td>
-      <td><%= fingerprint.active %></td>
-
-      <td class="text-right">
-
-        <%= link "Sterge", to: fingerprint_path(@conn, :delete, fingerprint), method: :delete, data: [confirm: "Stergeti?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-<div class="modal hide in" id="modal-add-event" aria-hidden="false" style="display: none;">
-                 <div class="modal-header">
-                   <button type="button" class="close" data-dismiss="modal">×</button>
-                   <h3>Adaugare amprenta</h3>
-                 </div>
-                 <div class="modal-body">
-                   <p>Alege dispozitivul pentru inregistrare:</p>
-                   <p>
-                     <div class="controls">
-                     <%= form_for @changeset, @action, [class: "form-horizontal"], fn f -> %>
-                       <%= hidden_input(f, :employeeID, value: @id) %>
-                       <%= hidden_input(f, :firstname, value: @employee.firstname) %>
-                       <%= hidden_input(f, :lastname, value: @employee.lastname) %>
-                       <%= select f, :device, @devices, class: "span8" %>
-                       <%= error_tag f, :device %>
-                     </div>
-                   </p>
-                 </div>
-                 <div class="modal-footer">
-                   <a href="#" class="btn" data-dismiss="modal">Inapoi</a>
-                   <%= submit "Adauga Amprenta", class: "btn btn-primary" %>
-                 </div>
-               </div>
-             <% end %>
-<div class="modal hide in" id="modal-cancelEnrollment" aria-hidden="false" style="display: none;">
-                 <div class="modal-header">
-                   <button type="button" class="close" data-dismiss="modal">×</button>
-                   <h3>Anulare inregistrarea amprentei:</h3>
-                 </div>
-                 <div class="modal-body">
-                   <p>Alege dispozitivul:</p>
-                   <p>
-                     <div class="controls">
-                     <%= form_for @changeset, @cancelEnrollmentAction, [class: "form-horizontal"], fn f -> %>
-                       <%= hidden_input(f, :employeeID, value: @id) %>
-                       <%= hidden_input(f, :firstname, value: @employee.firstname) %>
-                       <%= hidden_input(f, :lastname, value: @employee.lastname) %>
-                       <%= select f, :device, @devices, class: "span8" %>
-                       <%= error_tag f, :device %>
-                     </div>
-                   </p>
-                 </div>
-                 <div class="modal-footer">
-                   <a href="#" class="btn" data-dismiss="modal">Inapoi</a>
-                   <%= submit "Anuleaza inregistrarea", class: "btn btn-primary" %>
-                 </div>
-               </div>
-             <% end %>
+      <div class="row-fluid">
+        <a id="add-event" data-toggle="modal" href="#modal-add-event" class="btn btn-success"><i class="icon-plus icon-white"></i> Adauga amprenta</a>
+        <%= link "Editeaza Angajat", to: employee_path(@conn, :edit, @id), class: "btn btn-primary" %>
+        <a id="add-event" data-toggle="modal" href="#modal-cancelEnrollment" class="btn btn-danger"><i class="icon-plus icon-white"></i> Anuleaza adaugarea amprentei</a>
+      </div>
+      <div class="row-fluid">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Amprenta</th>
+              <th>Data inregistrarii</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= for fingerprint <- @fingerprints do %>
+                <tr>
+                  <td><%= fingerprint.f_id %></td>
+                  <td><%= fingerprint.inserted_at %></td>
+                  <td class="text-right">
+                    <%= link "Sterge", to: fingerprint_path(@conn, :delete, fingerprint), method: :delete, data: [confirm: "Stergeti?"], class: "btn btn-danger btn-xs" %>
+                  </td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="modal hide in" id="modal-add-event" aria-hidden="false" style="display: none;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Adaugare amprenta</h3>
+          </div>
+          <div class="modal-body">
+            <p>Alege dispozitivul pentru inregistrare:</p>
+            <div class="controls">
+            <%= form_for @changeset, @action, [class: "form-horizontal"], fn f -> %>
+              <%= hidden_input(f, :employeeID, value: @id) %>
+              <%= hidden_input(f, :firstname, value: @employee.firstname) %>
+              <%= hidden_input(f, :lastname, value: @employee.lastname) %>
+              <%= select f, :device, @devices, class: "span8" %>
+              <%= error_tag f, :device %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Inapoi</a>
+            <%= submit "Adauga Amprenta", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="modal hide in" id="modal-cancelEnrollment" aria-hidden="false" style="display: none;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Anulare inregistrarea amprentei:</h3>
+          </div>
+          <div class="modal-body">
+            <p>Alege dispozitivul:</p>
+            <p>
+              <div class="controls">
+              <%= form_for @changeset, @cancelEnrollmentAction, [class: "form-horizontal"], fn f -> %>
+                <%= hidden_input(f, :employeeID, value: @id) %>
+                <%= hidden_input(f, :firstname, value: @employee.firstname) %>
+                <%= hidden_input(f, :lastname, value: @employee.lastname) %>
+                <%= select f, :device, @devices, class: "span8" %>
+                <%= error_tag f, :device %>
+              </div>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Inapoi</a>
+            <%= submit "Anuleaza inregistrarea", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
