@@ -6,7 +6,6 @@ defmodule Attendance.EmployeeController do
   alias Attendance.Company
 
   def index(conn, _params) do
-    IO.inspect "asfsadfasdfasdfjkhasfkjhaskjfhaskjdfhsdf"
     current_user_id = get_session(conn, :current_user).id
     employees = Repo.all(from e in Attendance.Employee, join: c in Company, on: e.companies_id == c.id, where: c.user_id == ^current_user_id)
     render(conn, "index.html", employees: employees)
