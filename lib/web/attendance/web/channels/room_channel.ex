@@ -2,17 +2,13 @@ defmodule Attendance.RoomChannel do
   use Phoenix.Channel
   require Logger
 
-  def join("rooms:*", _message, socket) do
+  def join("rooms:lobby", _message, socket) do
     {:ok, socket}
   end
 
-  def join(_room, _params, _socket) do
-    {:error, %{reason: "you can only join the lobby"}}
+  def join(room, _params, _socket) do
+    {:error, %{reason: "you can only join the lobby. #{room}"}}
   end
-
-  def handle_in(_room, _message, socket) do
-     {:reply, :ok, socket}
-  end   
 
   def handle_in(_room, _message, socket) do
      {:reply, :ok, socket}

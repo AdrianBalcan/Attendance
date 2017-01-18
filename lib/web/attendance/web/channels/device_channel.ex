@@ -37,7 +37,7 @@ defmodule Attendance.DeviceChannel do
               ["IN"]  -> "OUT"
               _       -> "IN"
             end
-         changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["employeeID"], "f_id" => message["f_id"], "device_hw" => message["device_hw"], "devicegroup_id" => message["devicegroup_id"], "status" => status})
+         changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["employeeID"], "f_id" => message["f_id"], "device_hw" => message["device_hw"], "devicegroup_id" => message["devicegroup_id"], "status" => status, "inserted_at" => message["timestamp"]})
          case Attendance.Repo.insert(changeset) do
            {:ok, _changeset} ->
              {:reply, {:ok, %{type: message["type"], employeeID: message["employeeID"], result: status}}, socket}
