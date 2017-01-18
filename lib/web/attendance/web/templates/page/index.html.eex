@@ -57,7 +57,7 @@
                   <div class="widget-content nopadding" >
                     <table class="table table-bordered table-striped">
                       <%= for employeeOUT <- @employeesStatus do %>
-                        <%= if(employeeOUT.status == "OUT") do %>
+                        <%= if(employeeOUT.status != "IN") do %>
                           <tr>
                             <td><%= employeeOUT.firstname <> " " <> employeeOUT.lastname %></td>
                             <td><%= employeeOUT.inserted_at %></td>
