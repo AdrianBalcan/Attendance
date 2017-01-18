@@ -16,7 +16,7 @@ defmodule Attendance.Attendance do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:employeeID, :status, :f_id, :device_hw, :devicegroup_id])
+    |> cast(params, [:employeeID, :status, :f_id, :device_hw, :devicegroup_id, :inserted_at])
     |> validate_required([:employeeID])
   end
 end

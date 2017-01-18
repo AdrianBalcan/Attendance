@@ -6,6 +6,7 @@ defmodule Attendance.AttendanceController do
   alias Attendance.Attendance
 
   def index(conn, _params) do
+    #TODO: current user filter
     current_user_id = get_session(conn, :current_user).id
     attendances = Repo.all(from a in Attendance, join: e in Employee, on: a.employeeID == e.id, select: %{id: a.employeeID, firstname: e.firstname, lastname: e.lastname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status}, order_by: [desc: a.inserted_at])
     #attendances = Repo.all(Attendance)
@@ -48,7 +49,7 @@ defmodule Attendance.AttendanceController do
     changeset = Attendance.changeset(attendance, attendance_params)
 
     case Repo.update(changeset) do
-      {:ok, attendance} ->
+      {:ok, _attendance} ->
         conn
         |> put_flash(:info, "Attendance updated successfully.")
         |> redirect(to: attendance_path(conn, :index))

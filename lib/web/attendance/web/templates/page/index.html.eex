@@ -32,7 +32,42 @@
         <div class="widget-content" >
           <div class="row-fluid">
             <div class="span9">
-              <div class="chart"></div>
+              <div class="span6">
+                <div class="widget-box" style="margin-top: 0;">
+                  <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span> <h5>Prezenti</h5>
+                  </div>
+                  <div class="widget-content nopadding" >
+                    <table class="table table-bordered table-striped">
+                      <%= for employeeIN <- @employeesStatus do %>
+                        <%= if(employeeIN.status == "IN") do %>
+                          <tr>
+                            <td><%= employeeIN.firstname <> " " <> employeeIN.lastname %></td>
+                            <td><%= employeeIN.inserted_at %></td>
+                          <tr>
+                        <% end %>
+                      <% end %>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="span6">
+                <div class="widget-box" style="margin-top: 0;">
+                  <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span> <h5>Absenti</h5>
+                  </div>
+                  <div class="widget-content nopadding" >
+                    <table class="table table-bordered table-striped">
+                      <%= for employeeOUT <- @employeesStatus do %>
+                        <%= if(employeeOUT.status == "OUT") do %>
+                          <tr>
+                            <td><%= employeeOUT.firstname <> " " <> employeeOUT.lastname %></td>
+                            <td><%= employeeOUT.inserted_at %></td>
+                          </tr>
+                        <% end %>
+                      <% end %>
+                    </table>
+                  </div>
+                </div>
+              </div>  
             </div>
             <div class="span3">
               <ul class="site-stats">
@@ -41,7 +76,7 @@
                 <li class="bg_lh"><i class="icon-shopping-cart"></i> <strong>656</strong> <small>Ore lucrate</small></li>
                 <li class="bg_lh"><i class="icon-tag"></i> <strong>4</strong> <small>Notificari</small></li>
                 <li class="bg_lh"><i class="icon-repeat"></i> <strong>4</strong> <small>Concedii</small></li>
-                <li class="bg_lh"><i class="icon-globe"></i> <strong>48</strong> <small>Prezenti acum</small></li>
+                <li class="bg_lh"><i class="icon-globe"></i> <strong><%# @countIN %></strong> <small>Prezenti acum</small></li>
               </ul>
             </div>
           </div>
