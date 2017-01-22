@@ -3,14 +3,30 @@ defmodule Attendance.AttendanceController do
 
   plug Attendance.Plug.Authenticate
   alias Attendance.Employee
+  alias Attendance.DeviceGroup
   alias Attendance.Attendance
 
-  def index(conn, _params) do
-    #TODO: current user filter
+  def index(conn, params) do
+    limit = 25
     current_user_id = get_session(conn, :current_user).id
-    attendances = Repo.all(from a in Attendance, join: e in Employee, on: a.employeeID == e.id, select: %{id: a.employeeID, firstname: e.firstname, lastname: e.lastname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status}, order_by: [desc: a.inserted_at])
-    #attendances = Repo.all(Attendance)
-    render(conn, "index.html", attendances: attendances)
+
+    countQuery = from a in Attendance, join: e in Employee, on: a.employeeID == e.id, join: dg in DeviceGroup, on: e.devicegroups_id == dg.id, select: %{id: a.employeeID, firstname: e.firstname, lastname: e.lastname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status}, order_by: [desc: a.inserted_at], where: dg.user_id == ^current_user_id
+    countAttendances = Repo.aggregate(countQuery,  :count, :id)
+    totalPages = countAttendances / limit
+    if Map.has_key?(params, "p") do
+       currentPage = case Float.parse(params["p"]) do
+         {_num, ""} -> 
+           {currentPage, _} = Integer.parse(params["p"])
+           currentPage-1
+         {_num, _r} -> 0                # _r : remainder_of_bianry
+         :error     -> 0
+       end
+    else 
+      currentPage = 0
+    end
+    query = from a in Attendance, join: e in Employee, on: a.employeeID == e.id, join: dg in DeviceGroup, on: e.devicegroups_id == dg.id, select: %{id: a.employeeID, firstname: e.firstname, lastname: e.lastname, device: a.device_hw, devicegroup: a.devicegroup_id, timestamp: a.inserted_at, status: a.status}, order_by: [desc: a.inserted_at], where: dg.user_id == ^current_user_id, limit: ^limit, offset: ^(limit*currentPage)
+    attendances = Repo.all(query)
+    render(conn, "index.html", attendances: attendances, currentPage: currentPage+1, totalPages: totalPages)
   end
 
   def new(conn, _params) do

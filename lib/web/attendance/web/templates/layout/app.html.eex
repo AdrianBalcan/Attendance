@@ -106,6 +106,7 @@
     </div>
     <!--sidebar-menu-->
 
+     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <!--main-container-part-->
     <div id="content">
 
@@ -138,7 +139,6 @@ function resetMenu() {
    document.gomenu.selector.selectedIndex = 2;
 }
 </script>
-     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
      <!--: phoeonix alerts-->
      <script>
