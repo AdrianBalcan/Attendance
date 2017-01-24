@@ -1092,9 +1092,10 @@ div.dataTables_wrapper .ui-widget-header {
 	display: block;
 	height: 8px;
 }
-.modal {
+/*.modal {
 	z-index: 99999 !important;
 }
+*/
 .modal-backdrop {
 	z-index: 999 !important;
 }

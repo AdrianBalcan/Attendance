@@ -37,13 +37,13 @@
                   <div class="widget-title"> <span class="icon"> <i class="icon-list"></i> </span> <h5>Prezenti</h5>
                   </div>
                   <div class="widget-content nopadding" >
-                    <table class="table table-bordered table-striped">
+                    <table id="clockedInTable" class="table table-bordered table-striped">
                       <%= for employeeIN <- @employeesStatus do %>
                         <%= if(employeeIN.status == "IN") do %>
                           <tr>
                             <td><%= employeeIN.firstname <> " " <> employeeIN.lastname %></td>
                             <td><%= employeeIN.inserted_at %></td>
-                          <tr>
+                          </tr>
                         <% end %>
                       <% end %>
                     </table>
@@ -71,14 +71,17 @@
             </div>
             <div class="span3">
               <ul class="site-stats">
-                <li class="bg_lh"><i class="icon-user"></i> <strong>50</strong> <small>Total Angajati</small></li>
+                <li class="bg_lh"><i class="icon-user"></i> <strong><%= length(@employeesStatus) %></strong> <small>Total Angajati</small></li>
                 <li class="bg_lh"><i class="icon-plus"></i> <strong>Adauga</strong> <small>Angajati </small></li>
                 <li class="bg_lh"><i class="icon-shopping-cart"></i> <strong>656</strong> <small>Ore lucrate</small></li>
                 <li class="bg_lh"><i class="icon-tag"></i> <strong>4</strong> <small>Notificari</small></li>
                 <li class="bg_lh"><i class="icon-repeat"></i> <strong>4</strong> <small>Concedii</small></li>
-                <li class="bg_lh"><i class="icon-globe"></i> <strong><%# @countIN %></strong> <small>Prezenti acum</small></li>
+                <li class="bg_lh"><i class="icon-globe"></i> <strong id="clockedIN"></strong> <small>Prezenti acum</small></li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+<script>
+$('#clockedIN').html($('#clockedInTable tbody tr').length)
+</script>
