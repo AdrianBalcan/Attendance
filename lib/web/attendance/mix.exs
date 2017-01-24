@@ -42,6 +42,7 @@ defmodule Attendance.Mixfile do
      {:plug, "~>1.3"},
      {:poison, "~> 3.0", override: true},
      {:dogma, "~> 0.1", only: :dev},
+     {:timex, "~> 3.0"},
      {:comeonin, "~> 3.0"}]
   end
 
