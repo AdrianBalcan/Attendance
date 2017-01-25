@@ -4,7 +4,7 @@ defmodule Attendance.PageController do
 
   def index(conn, _params) do
     employeesStatus = Repo.all(from a in Attendance.Attendance, right_join: e in Attendance.Employee ,on: e.id == a.employeeID, select: %{firstname: e.firstname, lastname: e.lastname, employeeID: a.employeeID, status: a.status, inserted_at: a.inserted_at}, distinct: e.id, order_by: [desc: :id])
-    IO.inspect employeesStatus
+    current_user_id = get_session(conn, :current_user).id
     render(conn, "index.html", employeesStatus: employeesStatus)
   end
 end
