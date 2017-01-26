@@ -1,7 +1,6 @@
 defmodule Attendance.DeviceChannel do
   use Attendance.Web, :channel
 
-
   def join(_room, _message, socket) do
     {:ok, socket}
   end
@@ -18,10 +17,21 @@ defmodule Attendance.DeviceChannel do
              _ -> query
            end 
          {:reply, {:ok, %{type: message["type"], result: result}}, socket}
+       message["type"] == "employeesSync" ->
+         employeesSync = Repo.all(from a in Attendance.Attendance,
+           right_join: e in Attendance.Employee, on: e.id == a.employeeID,
+           join: f in Attendance.Fingerprint, on: e.id == f.employeeID,
+           select: %{employeeID: a.employeeID, firstname: e.firstname, lastname: e.lastname, f_id: f.f_id,
+             template: f.template, status: a.status,
+             inserted_at: a.inserted_at},
+           where: e.devicegroups_id == ^message["devicegroup"],
+           distinct: e.id, order_by: [desc: :id])
+         {:reply, {:ok, %{type: message["type"], result: employeesSync}}, socket}
        message["type"] == "statusSync" ->
          employeesStatus = Repo.all(from a in Attendance.Attendance,
            right_join: e in Attendance.Employee, on: e.id == a.employeeID,
            select: %{employeeID: a.employeeID, status: a.status, inserted_at: a.inserted_at},
+           where: e.devicegroups_id == ^message["devicegroup"],
            distinct: e.id, order_by: [desc: :id])
          {:reply, {:ok, %{type: message["type"], result: employeesStatus}}, socket}
        message["type"] == "keep_alive" ->
