@@ -18,14 +18,11 @@ defmodule Attendance.DeviceChannel do
            end 
          {:reply, {:ok, %{type: message["type"], result: result}}, socket}
        message["type"] == "employeesSync" ->
-         employeesSync = Repo.all(from a in Attendance.Attendance,
-           right_join: e in Attendance.Employee, on: e.id == a.employeeID,
+         employeesSync = Repo.all(from e in Attendance.Employee,
            join: f in Attendance.Fingerprint, on: e.id == f.employeeID,
-           select: %{employeeID: a.employeeID, firstname: e.firstname, lastname: e.lastname, f_id: f.f_id,
-             template: f.template, status: a.status,
-             inserted_at: a.inserted_at},
-           where: e.devicegroups_id == ^message["devicegroup"],
-           distinct: e.id, order_by: [desc: :id])
+           select: %{employeeID: e.id, firstname: e.firstname, lastname: e.lastname, f_id: f.f_id,
+             template: f.template},
+           where: e.devicegroups_id == ^message["devicegroup"])
          {:reply, {:ok, %{type: message["type"], result: employeesSync}}, socket}
        message["type"] == "statusSync" ->
          employeesStatus = Repo.all(from a in Attendance.Attendance,
@@ -40,6 +37,13 @@ defmodule Attendance.DeviceChannel do
          changeset = Attendance.Fingerprint.changeset(%Attendance.Fingerprint{}, %{"employeeID" => message["employeeID"], "template" => message["template"], "f_id" => message["f_id"]})
          case Attendance.Repo.insert(changeset) do
            {:ok, _changeset} ->
+             groupDevices = Repo.all(from d in Attendance.Device,
+               select: %{hw: d.hw},
+               #where: d.hw != ^message["hw"],
+               where: d.devicegroup_id == ^message["devicegroup"])
+             for device <- groupDevices do
+               Attendance.Endpoint.broadcast "sp:" <> device.hw, "new:msg", %{"response" => %{"type" => "enrollSync", "employeeID" => message["employeeID"], "firstname" => message["firstname"], "lastname" => message["lastname"], "f_id" => message["f_id"], "template" => message["template"]}}
+             end
              {:reply, :ok, socket}
            {:error, _changeset} ->
              {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
