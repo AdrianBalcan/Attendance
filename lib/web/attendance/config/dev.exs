@@ -40,5 +40,9 @@ config :attendance, Attendance.Repo,
   password: "attzogtest",
   database: "attendance_test",
   hostname: "internal.zog.ro",
+  #  username: "postgres",
+  #  password: "postgres",
+  #  database: "attendance_dev",
+  #  hostname: "db",
   pool_size: 10
 

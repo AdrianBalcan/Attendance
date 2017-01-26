@@ -62,7 +62,7 @@
         <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Rapoarte</span></a>
           <ul>
             <li><a href="/attendances">Pontaje</a></li>
-            <li><a href="/daily">Zilnic</a></li>
+            <li><a href="/day_views">Zilnic</a></li>
           </ul>
         </li>
         <li><a href="/employees"><i class="icon icon-th"></i> <span>Angajati</span></a></li>

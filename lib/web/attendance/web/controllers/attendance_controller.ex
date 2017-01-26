@@ -8,14 +8,7 @@ defmodule Attendance.AttendanceController do
 
   def index(conn, params) do
     limit = 25
-    
     current_user_id = get_session(conn, :current_user).id
-   # from = params["from"]
-   # to = params["to"]
-   # IO.inspect from
-   # IO.inspect to
-   # IO.inspect Ecto.Date.from_erl({2017, 01, 01})
-
     selectEmployees = Repo.all(from e in Employee, join: dg in DeviceGroup, on: e.devicegroups_id == dg.id, select: {fragment("? || ' ' || ?", e.firstname, e.lastname), e.id}, where: dg.user_id == ^current_user_id)
 
     query = from a in Attendance, join: e in Employee, on: a.employeeID == e.id,

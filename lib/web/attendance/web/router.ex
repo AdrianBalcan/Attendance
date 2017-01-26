@@ -30,6 +30,7 @@ defmodule Attendance.Router do
     resources "/employees", EmployeeController
     resources "/devicegroups", DeviceGroupController
     resources "/devices", DeviceController
+    resources "/day_views", DayViewController
   end
 
   # Other scopes may use custom stacks.

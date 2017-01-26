@@ -1,0 +1,6 @@
+<h2>Edit day view</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: day_view_path(@conn, :update, @day_view) %>
+
+<%= link "Back", to: day_view_path(@conn, :index) %>

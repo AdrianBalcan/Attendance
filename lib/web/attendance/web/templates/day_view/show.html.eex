@@ -1,0 +1,8 @@
+<h2>Show day view</h2>
+
+<ul>
+
+</ul>
+
+<%= link "Edit", to: day_view_path(@conn, :edit, @day_view) %>
+<%= link "Back", to: day_view_path(@conn, :index) %>
