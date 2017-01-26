@@ -39,7 +39,7 @@ defmodule Attendance.DeviceChannel do
            {:ok, _changeset} ->
              groupDevices = Repo.all(from d in Attendance.Device,
                select: %{hw: d.hw},
-               #where: d.hw != ^message["hw"],
+               where: d.hw != ^message["hw"],
                where: d.devicegroup_id == ^message["devicegroup"])
              for device <- groupDevices do
                Attendance.Endpoint.broadcast "sp:" <> device.hw, "new:msg", %{"response" => %{"type" => "enrollSync", "employeeID" => message["employeeID"], "firstname" => message["firstname"], "lastname" => message["lastname"], "f_id" => message["f_id"], "template" => message["template"]}}
@@ -59,7 +59,14 @@ defmodule Attendance.DeviceChannel do
          changeset = Attendance.Attendance.changeset(%Attendance.Attendance{}, %{"employeeID" => message["employeeID"], "f_id" => message["f_id"], "device_hw" => message["device_hw"], "devicegroup_id" => message["devicegroup_id"], "status" => status, "inserted_at" => message["timestamp"]})
          case Attendance.Repo.insert(changeset) do
            {:ok, _changeset} ->
-             {:reply, {:ok, %{type: message["type"], employeeID: message["employeeID"], result: status}}, socket}
+             groupDevices = Repo.all(from d in Attendance.Device,
+               select: %{hw: d.hw},
+               where: d.devicegroup_id == ^message["devicegroup_id"])
+             for device <- groupDevices do
+               Attendance.Endpoint.broadcast "sp:" <> device.hw, "new:msg", %{"response" => %{"type" => "identify-ok", "employeeID" => message["employeeID"], "result" => status, "timestamp" => message["timestamp"]}}
+             end
+               #{:reply, {:ok, %{type: message["type"], employeeID: message["employeeID"], result: status}}, socket}
+             {:noreply, socket}
            {:error, _changeset} ->
              {:reply, {:ok, %{type: message["type"], result: "error"}}, socket}
            end
