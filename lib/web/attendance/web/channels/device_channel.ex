@@ -12,13 +12,18 @@ defmodule Attendance.DeviceChannel do
        message["type"] == "devicegroup" ->
          hw = message["hw"]
          query = Repo.all(from d in Attendance.Device, select: d.devicegroup_id, where: d.hw == ^hw)
-         #if(length(query) == 0) do result = [0] else result = query end
          result =
-           case query do
+           case length(query) do
              0 -> [0] 
              _ -> query
            end 
          {:reply, {:ok, %{type: message["type"], result: result}}, socket}
+       message["type"] == "statusSync" ->
+         employeesStatus = Repo.all(from a in Attendance.Attendance,
+           right_join: e in Attendance.Employee, on: e.id == a.employeeID,
+           select: %{employeeID: a.employeeID, status: a.status, inserted_at: a.inserted_at},
+           distinct: e.id, order_by: [desc: :id])
+         {:reply, {:ok, %{type: message["type"], result: employeesStatus}}, socket}
        message["type"] == "keep_alive" ->
          {:reply, :error, socket}
        message["type"] == "enroll-ok" ->
